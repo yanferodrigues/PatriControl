@@ -29,7 +29,7 @@ SECRET_KEY = str(os.getenv("SECRET_KEY"))
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost','10.211.130.53', '127.0.0.1']
 
 
 # Application definition
@@ -42,6 +42,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'dashboard.apps.DashboardConfig',
+    'ativos.apps.AtivosConfig',
+    'investimentos.apps.InvestimentosConfig',
+    'user.apps.UserConfig',
+    
+    
 ]
 
 MIDDLEWARE = [
@@ -124,5 +129,9 @@ STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR,"static")
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'setup/static')]
+
+MEDIA_ROOT = os.path.join(BASE_DIR,"media")
+
+MEDIA_URL = "/media/"
 
 

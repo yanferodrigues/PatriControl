@@ -21,7 +21,9 @@
             
         </div>
         <aside id="aside">
-            <img class="logo-empresa" src="{% static 'assets/logos empresas/LOGO SOCIEDADE FRANCIOSI.png' %}" alt="">
+            <a href={% url "index" %}>
+                <img class="logo-empresa" src="{% static 'assets/logos empresas/LOGO SOCIEDADE FRANCIOSI.png' %}" alt="">
+            </a>
             <a href="{% url 'usuario'%}" class="conta-aside">  
                 <div class="conta-aside-conteudo">
                     <img class="imagem-conta" src="{% static 'assets/auxiliar/foto yan corporativa.jpeg' %}" alt="">

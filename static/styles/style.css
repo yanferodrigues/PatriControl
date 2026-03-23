@@ -548,7 +548,7 @@ main {
     margin-top: 20px;
 }
 .main-principal-index-card-direita-ativos-self {
-    flex: 1;
+    height: 72px;
     display: flex;
     justify-content: start;
     align-items: center;
