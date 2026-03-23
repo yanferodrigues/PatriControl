@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+            <nav class="navegacao-aside">
+                <a href="{% url 'index' %}">
+                    <img class="icon" src="{% static 'assets/icones/dashboard_branco.png' %}" alt="dashboard">
+                    Dashboard
+                </a>
+                <a href="{% url 'ativos' %}">
+                    <img class="icon" src="{% static 'assets/icones/patrimonio_branco.png' %}" alt="patrimonio">
+                    Ativos
+                </a>
+                <a href="{% url 'novo-ativo' %}">
+                    <img class="icon" src="{% static 'assets/icones/adicionar_branco.png' %}" alt="novo patrimonio">
+                    Novo Ativo
+                </a>
+                <a href="{% url 'investimentos' %}">
+                    <img class="icon" src="{% static 'assets/icones/imovel_branco.png' %}" alt="patrimonio">
+                    Investimentos
+                </a>
+                <a href="{% url 'novo-investimento' %}">
+                    <img class="icon" src="{% static 'assets/icones/adicionar_branco.png' %}" alt="novo patrimonio">
+                    Novo Investimento
+                </a>
+            </nav>
+        </aside>
+        <main class="aparecer-baixo">
+            <div class="main-topo">
+                <div>
+                    <p class="titulo-grande">Yan Felipe Rodrigues</p>
+                    <p class="subtitulo-medio">Sociedade Franciosi</p>
+                </div>
+                
+            </div>
+            
+            <div class="usuario-main">
+                <div class="topo-usuario">
+                    <div style="display: flex; flex-direction: column; gap: 20px;">
+                        <div style="display: flex; flex-direction: column; gap: 10px;">
+                            <label for="input-data-usuario">Data de incorporação:</label>
+                            <p class="subtitulo-medio" id="input-data-usuario">19/03/2026</p>
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 10px;">
+                            <label for="input-tipo-usuario">Tipo de usuário:</label>
+                            <p class="subtitulo-medio" id="input-tipo-usuario">Admin</p>
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 10px;">
+                            <label for="input-tipo-usuario">Empresa:</label>
+                            <p class="subtitulo-medio" id="input-empresa-usuario">Sociedade Franciosi</p>
+                        </div>
+                    </div>
+                    <img class="img-usuario" src="{% static 'assets/auxiliar/foto yan corporativa.jpeg' %}" alt="foto usuário">
+                </div>
+
+                <div style="display: flex; flex-direction: column; width: 60%; gap: 10px; min-width: 350px;">
+                    <label for="input-email-usuario">Email</label>
+                    <div style="display: flex; justify-content: center; align-items: center;">
+                        <input type="email" id="input-email-usuario" class="inputs-usuario" value="yan.vieira@sociedadefranciosi.com.br" readonly>
+                        <button class="btn-editar-usuario" style="border: transparent 1px solid; cursor:default;"></button>
+                    </div>
+                </div>
+                <div style="display: flex; flex-direction: column; width: 60%; gap: 10px; min-width: 350px;">
+                    <label for="input-nome-usuario">Nome</label>
+                    <div style="display: flex; justify-content: center; align-items: center;">
+                        <input type="text" id="input-nome-usuario" class="inputs-usuario" value="Yan Felipe Rodrigues Vieira" readonly>
+                        <button class="btn-editar-usuario">
+                            <img src="{% static 'assets/icones/editar_branco.png' %}" alt="">
+                        </button>
+                    </div>
+                </div>
+                <div style="display: flex; flex-direction: column;width: 60%; gap: 10px; min-width: 350px;">
+                    <label for="input-senha-usuario">Senha</label>
+                    <div style="display: flex; justify-content: center; align-items: center;">
+                        <input type="password" id="input-senha-usuario" class="inputs-usuario" value="adsfasdfasdfasf" readonly>
+                        <button class="btn-editar-usuario">
+                            <img src="{% static 'assets/icones/editar_branco.png' %}" alt="">
+                        </button>
+                    </div>
+                </div>
+                <button id="btn-logout"> Logout </button>
+            </div>
+        </main>
+    </div>
+    
+    <script src="{% static 'assets/js/dashboard.js' %}"></script>
+    <script src="{% static 'assets/js/geral.js' %}"></script>
+{% endblock content %}

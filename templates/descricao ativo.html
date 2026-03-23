@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+            <nav class="navegacao-aside">
+                <a href="{% url 'index' %}">
+                    <img class="icon" src="{% static 'assets/icones/dashboard_branco.png' %}" alt="dashboard">
+                    Dashboard
+                </a>
+                <a class="link-ativo" href="{% url 'ativos' %}">
+                    <img class="icon" src="{% static 'assets/icones/patrimonio_branco.png' %}" alt="patrimonio">
+                    Ativos
+                </a>
+                <a href="{% url 'novo-ativo' %}">
+                    <img class="icon" src="{% static 'assets/icones/adicionar_branco.png' %}" alt="novo patrimonio">
+                    Novo Ativo
+                </a>
+                <a href="{% url 'investimentos' %}">
+                    <img class="icon" src="{% static 'assets/icones/imovel_branco.png' %}" alt="patrimonio">
+                    Investimentos
+                </a>
+                <a href="{% url 'novo-investimento' %}">
+                    <img class="icon" src="{% static 'assets/icones/adicionar_branco.png' %}" alt="novo patrimonio">
+                    Novo Investimento
+                </a>
+            </nav>
+        </aside>
+        <main class="aparecer-baixo">
+            <div class="main-topo">
+                <div>
+                    <p class="titulo-grande">IS001245</p>
+                    <p class="subtitulo-medio">TRATOR FARMALL 100</p>
+                </div>
+                
+                <div style="display: flex; gap: 10px;">
+                    
+                    <button class="botao-editar">
+                        Editar
+                        <img src="{% static 'assets/icones/editar_branco.png' %}" alt="editar patrimonio">
+                    </button>
+                    <button class="botao-excluir">
+                        Excluir
+                        <img src="{% static 'assets/icones/lixeira_branca.png' %}" alt="excluir patrimonio">
+                    </button>
+                </div>
+            </div>
+            <div>
+                <div class="informacoes-patrimonio-card">
+                    <p class="titulo-pequeno">Detalhes</p>
+                    <div style="width: 100%;">
+                        <div class="sep-detalhes" style="display: flex; flex-direction: column;">
+                            <div style="display: flex; height: 30px; gap: 5px;">
+                                <img class="icone-informacoes" src="{% static 'assets/icones/etiqueta_branco.png' %}" alt="etiqueta">
+                                <p class="subtitulo-medio">Categoria</p>
+                            </div>
+                            <p> Maquinas e Equipamentos</p>
+                        </div>
+                        <div class="sep-detalhes" style="display: flex; flex-direction: column;">
+                            <div style="display: flex; height: 30px; gap: 5px;">
+                                <img class="icone-informacoes" src="{% static 'assets/icones/localizacao_branco.png' %}" alt="localização">
+                                <p class="subtitulo-medio">Localização</p>
+                            </div>
+                            <p> Santa Lúcia</p>
+                        </div>
+                        <div class="sep-detalhes" style="display: flex; flex-direction: column;">
+                            <div style="display: flex; height: 30px; gap: 5px;">
+                                <img class="icone-informacoes" src="{% static 'assets/icones/usuario_branco.png' %}" alt="responsável">
+                                <p class="subtitulo-medio">Responsável</p>
+                            </div>
+                            <p> Yan Felipe / setor de patrimônio </p>
+                        </div>
+                        <div class="sep-detalhes" style="display: flex; flex-direction: column;">
+                            <div style="display: flex; height: 30px; gap: 5px;">
+                                <img class="icone-informacoes" src="{% static 'assets/icones/calendario_branco.png' %}" alt="calendario">
+                                <p class="subtitulo-medio">Data de aquisição</p>
+                            </div>
+                            <p> 12/06/2020 </p>
+                        </div>
+                        <div class="sep-detalhes" style="display: flex; flex-direction: column;">
+                            <div style="display: flex; height: 30px; gap: 5px;">
+                                <img class="icone-informacoes" src="{% static 'assets/icones/hashtag_branco.png' %}" alt="">
+                                <p class="subtitulo-medio">Marca - modelo</p>
+                            </div>
+                            <p> CASE - FARMALL 100 </p>
+                        </div>
+                        <div class="sep-detalhes" style="display: flex; flex-direction: column;">
+                            <div style="display: flex; height: 30px; gap: 5px;">
+                                <img class="icone-informacoes" src="{% static 'assets/icones/hashtag_branco.png' %}" alt="">
+                                <p class="subtitulo-medio">Nº de série / Chassi </p>
+                            </div>
+                            <p>HCCH23VBJF33123N12</p>
+                        </div>
+                        <div class="sep-detalhes" style="display: flex; flex-direction: column;">
+                            <div style="display: flex; height: 30px; gap: 5px;">
+                                <img class="icone-informacoes" src="{% static 'assets/icones/hashtag_branco.png' %}" alt="">
+                                <p class="subtitulo-medio">Placa</p>
+                            </div>
+                            <p> SEM PLACA</p>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="informacoes-patrimonio-card" style="min-height: 100px;">
+                        <p class="titulo-pequeno">Valores</p>
+                        <div class="box-valores-ativo">
+                            <div class="valores-ativo aquisicao">
+                                <p class="subtitulo-medio">Valor de aquisição</p>
+                                <p class="titulo-medio">R$4.500,00</p>
+                            </div>
+                            <div class="valores-ativo atual">
+                                <p class="subtitulo-medio">Valor de atual</p>
+                                <p class="titulo-medio">R$3.200,00</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="informacoes-patrimonio-card" style="min-height: 100px;">
+                        <p class="titulo-pequeno">Descrição</p>
+                        <p class="subtitulo-medio"> Trator Farmall 100 atualmente locado na fazenda Santa Lucia</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script src="{% static 'assets/js/dashboard.js' %}"></script>
+    <script src="{% static 'assets/js/geral.js' %}"></script>
+{% endblock content %}

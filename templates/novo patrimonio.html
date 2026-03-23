@@ -1,0 +1,167 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+            <nav class="navegacao-aside">
+                <a href="{% url 'index' %}">
+                    <img class="icon" src="{% static 'assets/icones/dashboard_branco.png' %}" alt="dashboard">
+                    Dashboard
+                </a>
+                <a href="{% url 'ativos' %}">
+                    <img class="icon" src="{% static 'assets/icones/patrimonio_branco.png' %}" alt="patrimonio">
+                    Ativos
+                </a>
+                <a class="link-ativo" href="{% url 'novo-ativo' %}">
+                    <img class="icon" src="{% static 'assets/icones/adicionar_branco.png' %}" alt="novo patrimonio">
+                    Novo Ativo
+                </a>
+                <a href="{% url 'investimentos' %}">
+                    <img class="icon" src="{% static 'assets/icones/imovel_branco.png' %}" alt="patrimonio">
+                    Investimentos
+                </a>
+                <a href="{% url 'novo-investimento' %}">
+                    <img class="icon" src="{% static 'assets/icones/adicionar_branco.png' %}" alt="novo patrimonio">
+                    Novo Investimento
+                </a>
+            </nav>
+        </aside>
+        <main class="aparecer-baixo">
+            <div id="card-upload-foto">
+                <label class="upload-box">
+                    <input type="file" accept="image/*" id="inputFoto">
+
+                    <img id="preview" class="preview-img">
+
+                    <div class="conteudo-upload" id="textoUpload">
+                        <img src="{% static 'assets/icones/adicionar imagem.png' %}" alt="adicionar imagem">
+                        <p>Adicionar foto do ativo</p>
+                    </div>
+                </label>
+            </div>
+        
+            <div class="informacoes-patrimonio-card">
+                <p class="titulo-medio">Informações Básicas</p>
+                <div class="box-inputs">
+                    <div>
+                        <label class="label-inputs" for="input-codigo-ativo">Código *</label>
+                        <input class="input-grande" name="input-codigo-ativo" id="input-codigo-ativo" type="text" placeholder="Ex: IS000001" required>
+                    </div>
+                    <div>
+                        <label class="label-inputs" for="input-descricao-ativo">Descrição (Tipo) *</label>
+                        <input class="input-grande" name="input-descricao-ativo" id="input-descricao-ativo" type="text" placeholder="Ex: Trator" required>
+                    </div>
+                </div>
+                <div class="box-inputs">
+                    <div>
+                        <label class="label-inputs" for="input-chassi-ativo">Chassi/Nº de Série</label>
+                        <input class="input-grande" name="input-chassi-ativo" id="input-chassi-ativo" type="text" placeholder="HCCS9845322IH43">
+                    </div>
+                    <div>
+                        <label class="label-inputs" for="input-placa-ativo">Placa</label>
+                        <input class="input-grande" name="input-placa-ativo" id="input-placa-ativo" type="text" placeholder="Ex: TGH0P98">
+                    </div>
+                </div>
+                <div class="box-inputs">
+                    <div>
+                        <label class="label-inputs" for="input-adesivado-ativo">Adesivado *</label>
+                        <select class="input-grande" name="input-adesivado-ativo" id="input-adesivado-ativo" type="text" placeholder="HCCS9845322IH43">
+                            <option value="NAO ADESIVADO" selected>Não adesivado</option>
+                            <option value="ADESIVADO">Adesivado</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="label-inputs" for="input-auxiliar-ativo">Código auxiliar</label>
+                        <input class="input-grande" name="input-auxiliar-ativo" id="input-auxiliar-ativo" type="text" placeholder="Ex: VEI-065">
+                    </div>
+                </div>
+                <div class="box-inputs">
+                    <div>
+                        <label class="label-inputs" for="input-cor-ativo">Cor primária</label>
+                        <input class="input-grande" name="input-cor-ativo" id="input-cor-ativo" type="text" placeholder="Ex: Trator">
+                    </div>
+                    <div>
+                        <label class="label-inputs" for="select-categoria-ativo">Categoria *</label>
+                        <select class="input-grande" name="select-categoria-ativo" id="select-categoria-ativo" required>
+                            <option disabled hidden selected></option>
+                            <option value="MAQUINAS E IMPLEMENTOS">Maquinas e implementos</option>
+                            <option value="INFORMATICA E COMUNICACAO">Informática e comunicação</option>
+                            <option value="VEICULOS">Veículos</option>
+                            <option value="EQUIPAMENTOS DIVERSOS">Equipamentos diversos</option>
+                            <option value="IMOVEIS">Imóveis</option>
+                            <option value="MOVEIS E UTENSILIOS">Móveis e utensílios</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label class="label-inputs" for="select-status-ativo">Status *</label>
+                        <select class="input-grande" name="select-status-ativo" id="select-status-ativo" required>
+                            <option value="ATIVO" selected>Ativo</option>
+                            <option value="INATIVO">Inativo</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="box-inputs">
+                    <div>
+                        <label class="label-inputs" for="textarea-detalhamento-ativo">Detalhamento</label>
+                        <textarea class="textarea-grande" name="textarea-detalhamento-ativo" id="textarea-detalhamento-ativo" placeholder="Informações extras..."></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="informacoes-patrimonio-card">
+                <p class="titulo-medio">Localização/Responsável</p>
+                <div class="box-inputs">
+                    <div>
+                        <label class="label-inputs" for="input-localizacao-ativo">Localização *</label>
+                        <select class="input-grande" name="input-localizacao-ativo" id="input-localizacao-ativo" type="text" required>
+                            <option selected hidden></option>
+                            <option value="SANTA LUCIA">Santa Lúcia</option>
+                            <option value="GRANDE LESTE">Grande Leste</option>
+                            <option value="SANTO EXPEDITO">Santo Expedito</option>
+                            <option value="JATOBA">Jatobá</option>
+                            <option value="ESCRITORIO CENTRAL">Escritório Central</option>
+                            <option value="UBA">UBA</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="label-inputs" for="input-responsavel-ativo">Responsável</label>
+                        <input class="input-grande" name="input-responsavel-ativo" id="input-responsavel-ativo" type="text" placeholder="Ex: Yan Felipe">
+                    </div>
+                </div>
+            </div>
+            <div class="informacoes-patrimonio-card">
+                <p class="titulo-medio">Informações Financeiras</p>
+                <div class="box-inputs">
+                    <div>
+                        <label class="label-inputs" for="input-data-ativo">Data de incorporação *</label>
+                        <input class="input-grande" name="input-data-ativo" id="input-data-ativo" type="date" placeholder="Ex: 15/03/2025">
+                    </div>
+                    <div>
+                        <label class="label-inputs" for="input-responsavel-ativo">Fornecedor</label>
+                        <input class="input-grande" name="input-responsavel-ativo" id="input-responsavel-ativo" type="text" placeholder="Ex: Bombas Tigre Ltda">
+                    </div>
+                    <div>
+                        <label class="label-inputs" for="input-responsavel-ativo">Nº da NF</label>
+                        <input class="input-grande" name="input-responsavel-ativo" id="input-responsavel-ativo" type="text" placeholder="Ex: 026">
+                    </div>
+                </div>
+                <div class="box-inputs">
+                    <div>
+                        <label class="label-inputs" for="input-valor-ativo">Valor *</label>
+                        <input class="input-grande" name="input-valor-ativo" id="input-valor-ativo" type="number" placeholder="R$">
+                    </div>
+                    <div class="upload-nota-fiscal">
+                        <label class="label-inputs" for="input-nota-ativo">Nota Fiscal</label>
+                        <label class="campo-upload-nota" name="input-nota-ativo" id="input-nota-ativo">
+                            <img src="{% static 'assets/icones/adicionar imagem.png' %}" alt="add file">
+                            <input id="input-nota" type="file" accept="application/pdf">
+                        </label>
+                        <button onclick="visualizarNota()">Vizualizar nota fiscal</button>
+                        <button onclick="excluirNota()">Excluir nota fiscal</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script src="{% static 'assets/js/novo patrimonio.js' %}"></script>
+    <script src="{% static 'assets/js/geral.js' %}"></script>
+{% endblock content %}

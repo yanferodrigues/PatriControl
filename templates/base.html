@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.8">
+    <title>PatriControl</title>
+    <link rel="stylesheet" href="{% static 'styles/style.css' %}">
+    <link rel="icon" href="{% static 'assets/icones/patrimonio_branco.png' %}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <header>
+        <button id="botao-menu" onclick="abrirMenu(this)">
+            <img src="{% static 'assets/icones/menu-branco.png' %}" alt="">
+        </button>
+    </header>
+    <div style="display: flex; min-width: 500px;">
+        <div class="overlay" onclick="abrirMenu(this)">
+            
+        </div>
+        <aside id="aside">
+            <img class="logo-empresa" src="{% static 'assets/logos empresas/LOGO SOCIEDADE FRANCIOSI.png' %}" alt="">
+            <a href="{% url 'usuario'%}" class="conta-aside">  
+                <div class="conta-aside-conteudo">
+                    <img class="imagem-conta" src="{% static 'assets/auxiliar/foto yan corporativa.jpeg' %}" alt="">
+                    <div>
+                        <p class="titulo-pequeno">Yan Felipe Rodrigues</p>
+                        <p class="subtitulo-pequeno">Assistente patrimonial</p>
+                    </div>
+                </div>
+            </a>
+{% block content %}{% endblock content %}
+</body>
+</html>

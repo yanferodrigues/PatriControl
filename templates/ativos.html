@@ -1,0 +1,244 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+            <nav class="navegacao-aside">
+                <a href="{% url 'index' %}">
+                    <img class="icon" src="{% static 'assets/icones/dashboard_branco.png' %}" alt="dashboard">
+                    Dashboard
+                </a>
+                <a class="link-ativo" href="{% url 'ativos' %}">
+                    <img class="icon" src="{% static 'assets/icones/patrimonio_branco.png' %}" alt="patrimonio">
+                    Ativos
+                </a>
+                <a href="{% url 'novo-ativo' %}">
+                    <img class="icon" src="{% static 'assets/icones/adicionar_branco.png' %}" alt="novo patrimonio">
+                    Novo Ativo
+                </a>
+                <a href="{% url 'investimentos' %}">
+                    <img class="icon" src="{% static 'assets/icones/imovel_branco.png' %}" alt="patrimonio">
+                    Investimentos
+                </a>
+                <a href="{% url 'novo-investimento' %}">
+                    <img class="icon" src="{% static 'assets/icones/adicionar_branco.png' %}" alt="novo patrimonio">
+                    Novo Investimento
+                </a>
+            </nav>
+        </aside>
+        <main class="aparecer-baixo">
+            <div class="main-topo">
+                <div>
+                    <p class="titulo-grande">Patrimônio</p>
+                    <p class="subtitulo-medio">1500 ativos encontrados</p>
+                </div>
+                
+                <button class="botao-azul">
+                    <img src="{% static 'assets/icones/adicionar_branco.png' %}" alt="Novo patrimônio">
+                    Novo ativo
+                </button>
+            </div>
+            <div class="main-pesquisa-patrimonio">
+                <div class="main-pesquisa">
+                    <img src="{% static 'assets/icones/lupa_branca.png' %}" alt="">
+                    <input class="main-pesquisa-patrimonio-input" placeholder="Digite o código ou descrição do patrimônio" type="text">
+                </div>
+                <select class="main-pesquisa-patrimonio-select-categoria" name="" id="">
+                    <option value="TODAS AS CATEGORIAS">Todas as categorias</option>
+                    <option value="MAQUINAS E IMPLEMENTOS">Maquinas e implementos</option>
+                    <option value="INFORMATICA E COMUNICACAO">Informática e comunicação</option>
+                    <option value="VEICULOS">Veículos</option>
+                    <option value="EQUIPAMENTOS DIVERSOS">Equipamentos diversos</option>
+                    <option value="IMOVEIS">Imóveis</option>
+                    <option value="MOVEIS E UTENSILIOS">Móveis e utensílios</option>
+                </select>
+                <select class="main-pesquisa-patrimonio-select-status" name="" id="">
+                    <option value="GERAL">Geral</option>
+                    <option value="ATIVO">Ativo</option>
+                    <option value="INATIVO">Inativo</option>
+                </select>
+            </div>
+            <div class="main-principal-patrimonio">
+                <a href="{% url 'descricao-ativo' %}" class="main-principal-patrimonio-card">
+                    <img class="main-principal-patrimonio-card-foto" src="{% static 'assets/auxiliar/farmall 100.png' %}" alt="">
+                    <div class="main-principal-patrimonio-card-descricao">
+                        <div class="main-principal-patrimonio-card-descricao-titulo">
+                            <div>
+                                <p class="titulo-pequeno card-titulo">Trator farmall 100</p>
+                                <p class="subtitulo-medio">IS001289</p>
+                            </div>
+                            <div class="botao-categoria">
+                                Máquinas e implementos
+                            </div>
+                        </div>
+                        <div class="main-principal-patrimonio-card-descricao-meio">
+                            <div>
+                                <img src="{% static 'assets/icones/localizacao_branco.png' %}" alt="localização">
+                                <p class="subtitulo-medio">Santa Lúcia</p>
+                            </div>
+                            <div>
+                                <p class="subtitulo-medio">14/05/2024</p>
+                            </div>
+                        </div>
+                        <div class="card-valores">
+                            <p class="titulo-azul">R$3.500.300,00</p>
+                            <div class="patrimonio-ativo">
+                                Ativo
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <a href="{% url 'descricao-ativo' %}" class="main-principal-patrimonio-card">
+                    <div class="sem-foto">
+                        IS000989
+                    </div>
+                    <div class="main-principal-patrimonio-card-descricao">
+                        <div class="main-principal-patrimonio-card-descricao-titulo">
+                            <div>
+                                <p class="titulo-pequeno card-titulo" title="Celular samsung Galaxy A35">Celular samsung Galaxy A35</p>
+                                <p class="subtitulo-medio">IS000989</p>
+                            </div>
+                            <div class="botao-categoria">
+                                Informática e comunicação
+                            </div>
+                        </div>
+                        <div class="main-principal-patrimonio-card-descricao-meio">
+                            <div>
+                                <img src="{% static 'assets/icones/localizacao_branco.png' %}" alt="localização">
+                                <p class="subtitulo-medio">Escritório central</p>
+                            </div>
+                            <div>
+                                <p class="subtitulo-medio">10/12/2025</p>
+                            </div>
+                        </div>
+                        <div class="card-valores">
+                            <p class="titulo-azul">R$1.300,00</p>
+                            <div class="patrimonio-ativo">
+                                Ativo
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <a href="{% url 'descricao-ativo' %}" class="main-principal-patrimonio-card">
+                    <img class="main-principal-patrimonio-card-foto" src="{% static 'assets/auxiliar/imagem geladeira eletrolux.webp' %}" alt="">
+                    <div class="main-principal-patrimonio-card-descricao">
+                        <div class="main-principal-patrimonio-card-descricao-titulo">
+                            <div>
+                                <p class="titulo-pequeno card-titulo">Geladeira Eletrolux 59L</p>
+                                <p class="subtitulo-medio">IS000029</p>
+                            </div>
+                            <div class="botao-categoria">
+                                Móveis e utensílios
+                            </div>
+                        </div>
+                        <div class="main-principal-patrimonio-card-descricao-meio">
+                            <div>
+                                <img src="{% static 'assets/icones/localizacao_branco.png' %}" alt="localização">
+                                <p class="subtitulo-medio">Grande Leste</p>
+                            </div>
+                            <div>
+                                <p class="subtitulo-medio">08/07/2019</p>
+                            </div>
+                        </div>
+                        <div class="card-valores">
+                            <p class="titulo-azul">R$4.300,00</p>
+                            <div class="patrimonio-ativo">
+                                Ativo
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <a href="{% url 'descricao-ativo' %}" class="main-principal-patrimonio-card">
+                    <div class="sem-foto">
+                        IS001169
+                    </div>
+                    <div class="main-principal-patrimonio-card-descricao">
+                        <div class="main-principal-patrimonio-card-descricao-titulo">
+                            <div>
+                                <p class="titulo-pequeno card-titulo">Caminhonete Hilux 4x4</p>
+                                <p class="subtitulo-medio">IS001169</p>
+                            </div>
+                            <div class="botao-categoria">
+                                Veículos
+                            </div>
+                        </div>
+                        <div class="main-principal-patrimonio-card-descricao-meio">
+                            <div>
+                                <img src="{% static 'assets/icones/localizacao_branco.png' %}" alt="localização">
+                                <p class="subtitulo-medio">Santa Lúcia</p>
+                            </div>
+                            <div>
+                                <p class="subtitulo-medio">04/02/2022</p>
+                            </div>
+                        </div>
+                        <div class="card-valores">
+                            <p class="titulo-azul">R$200.300,00</p>
+                            <div class="patrimonio-inativo">
+                                Inativo
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <a href="{% url 'descricao-ativo' %}" class="main-principal-patrimonio-card">
+                    <img class="main-principal-patrimonio-card-foto" src="{% static 'assets/auxiliar/imagem hilux.jpg' %}" alt="">
+                    <div class="main-principal-patrimonio-card-descricao">
+                        <div class="main-principal-patrimonio-card-descricao-titulo">
+                            <div>
+                                <p class="titulo-pequeno card-titulo">Caminhonete Hilux 4x4</p>
+                                <p class="subtitulo-medio">IS001429</p>
+                            </div>
+                            <div class="botao-categoria">
+                                Veículos
+                            </div>
+                        </div>
+                        <div class="main-principal-patrimonio-card-descricao-meio">
+                            <div>
+                                <img src="{% static 'assets/icones/localizacao_branco.png' %}" alt="localização">
+                                <p class="subtitulo-medio">Santo Expedito</p>
+                            </div>
+                            <div>
+                                <p class="subtitulo-medio">07/12/2020</p>
+                            </div>
+                        </div>
+                        <div class="card-valores">
+                            <p class="titulo-azul">R$200.300,00</p>
+                            <div class="patrimonio-ativo">
+                                Ativo
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <a href="{% url 'descricao-ativo' %}" class="main-principal-patrimonio-card">
+                    <img class="main-principal-patrimonio-card-foto" src="{% static 'assets/auxiliar/farmall 100.png' %}" alt="">
+                    <div class="main-principal-patrimonio-card-descricao">
+                        <div class="main-principal-patrimonio-card-descricao-titulo">
+                            <div>
+                                <p class="titulo-pequeno card-titulo">Trator farmall 100</p>
+                                <p class="subtitulo-medio">IS001589</p>
+                            </div>
+                            <div class="botao-categoria">
+                                Máquinas e implementos
+                            </div>
+                        </div>
+                        <div class="main-principal-patrimonio-card-descricao-meio">
+                            <div>
+                                <img src="{% static 'assets/icones/localizacao_branco.png' %}" alt="localização">
+                                <p class="subtitulo-medio">Santa Lúcia</p>
+                            </div>
+                            <div>
+                                <p class="subtitulo-medio">14/05/2024</p>
+                            </div>
+                        </div>
+                        <div class="card-valores">
+                            <p class="titulo-azul">R$1.000.300,00</p>
+                            <div class="patrimonio-inativo">
+                                Inativo
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </main>
+    </div>
+    
+    <script src="{% static 'assets/js/dashboard.js' %}"></script>
+    <script src="{% static 'assets/js/geral.js' %}"></script>
+{% endblock content %}
