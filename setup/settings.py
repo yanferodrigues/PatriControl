@@ -45,8 +45,7 @@ INSTALLED_APPS = [
     'ativos.apps.AtivosConfig',
     'investimentos.apps.InvestimentosConfig',
     'user.apps.UserConfig',
-    
-    
+    'django.contrib.humanize',
 ]
 
 MIDDLEWARE = [
@@ -134,4 +133,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR,"media")
 
 MEDIA_URL = "/media/"
 
+LANGUAGE_CODE = 'pt-br'
+
+USE_L10N = True
 

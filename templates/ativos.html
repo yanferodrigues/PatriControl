@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load humanize %}
 {% block content %}
             <nav class="navegacao-aside">
                 <a href="{% url 'index' %}">
@@ -28,7 +29,13 @@
             <div class="main-topo">
                 <div>
                     <p class="titulo-grande">Patrimônio</p>
-                    <p class="subtitulo-medio">1500 ativos encontrados</p>
+                    <p class="subtitulo-medio">
+                        {% if patrimonio %}
+                        {{patrimonio|length}} item em patrimônio encontrado
+                        {% else %}
+                        Nenhum ativo encontrado
+                        {% endif %}
+                    </p>
                 </div>
                 
                 <button class="botao-azul">
@@ -57,184 +64,77 @@
                 </select>
             </div>
             <div class="main-principal-patrimonio">
-                <a href="{% url 'descricao-ativo' %}" class="main-principal-patrimonio-card">
-                    <img class="main-principal-patrimonio-card-foto" src="{% static 'assets/auxiliar/farmall 100.png' %}" alt="">
-                    <div class="main-principal-patrimonio-card-descricao">
-                        <div class="main-principal-patrimonio-card-descricao-titulo">
-                            <div>
-                                <p class="titulo-pequeno card-titulo">Trator farmall 100</p>
-                                <p class="subtitulo-medio">IS001289</p>
+                {% if patrimonio %}
+                    {% for ativo in patrimonio %}
+                        <a href="{% url 'descricao-ativo' %}" class="main-principal-patrimonio-card">
+                            <div style='display: flex; justify-content:center; margin-bottom: 10px;'>
+                                {% if ativo.adesivado %}
+                                <p class="subtitulo-pequeno">
+                                    Adesivado
+                                </p>
+                                {% else %}
+                                <p class="subtitulo-pequeno">
+                                    Não adesivado
+                                </p>
+                                {% endif %}
                             </div>
-                            <div class="botao-categoria">
-                                Máquinas e implementos
+                            {% if ativo.foto %}
+                            <img class="main-principal-patrimonio-card-foto" src='{{ ativo.foto.url}}' alt="foto {{ativo.descricao}}">
+                            {% else %}
+                            <div class="sem-foto">
+                                {{ativo.codigo|upper}}
                             </div>
-                        </div>
-                        <div class="main-principal-patrimonio-card-descricao-meio">
-                            <div>
-                                <img src="{% static 'assets/icones/localizacao_branco.png' %}" alt="localização">
-                                <p class="subtitulo-medio">Santa Lúcia</p>
+                            {% endif %}
+                            <div class="main-principal-patrimonio-card-descricao">
+                                <div class="main-principal-patrimonio-card-descricao-titulo">
+                                    <div>
+                                        <p class="titulo-pequeno card-titulo">{{ativo.descricao|upper}}</p>
+                                        <p class="subtitulo-medio">{{ ativo.codigo|upper}}</p>
+                                    </div>
+                                    <div class="botao-categoria">
+                                        {{ativo.categoria}}
+                                    </div>
+                                </div>
+                                <div class="main-principal-patrimonio-card-descricao-meio">
+                                    <div>
+                                        <img src="{% static 'assets/icones/localizacao_branco.png' %}" alt="localização">
+                                        <p class="subtitulo-medio">{{ativo.localizacao|title}}</p>
+                                    </div>
+                                    <div>
+                                        <p class="subtitulo-medio">
+                                            {% if ativo.incorporacao %}
+                                                {{ativo.incorporacao|date:"d/m/Y"}}
+                                            {% else %}
+                                                Não informado
+                                            {% endif %}
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="card-valores">
+                                    <p class="titulo-azul">
+                                        {% if ativo.valor %}
+                                            R$ {{ ativo.valor|intcomma }}
+                                        {% else %}
+                                            Não informado
+                                        {% endif %}
+                                    </p>
+                                        {% if status %}
+                                        <div class="patrimonio-ativo">
+                                            Ativo
+                                        </div>
+                                        {% else %}
+                                        <div class="patrimonio-inativo">
+                                            Inativo
+                                        </div>
+                                        {% endif %}
+                                </div>
                             </div>
-                            <div>
-                                <p class="subtitulo-medio">14/05/2024</p>
-                            </div>
-                        </div>
-                        <div class="card-valores">
-                            <p class="titulo-azul">R$3.500.300,00</p>
-                            <div class="patrimonio-ativo">
-                                Ativo
-                            </div>
-                        </div>
-                    </div>
-                </a>
-                <a href="{% url 'descricao-ativo' %}" class="main-principal-patrimonio-card">
-                    <div class="sem-foto">
-                        IS000989
-                    </div>
-                    <div class="main-principal-patrimonio-card-descricao">
-                        <div class="main-principal-patrimonio-card-descricao-titulo">
-                            <div>
-                                <p class="titulo-pequeno card-titulo" title="Celular samsung Galaxy A35">Celular samsung Galaxy A35</p>
-                                <p class="subtitulo-medio">IS000989</p>
-                            </div>
-                            <div class="botao-categoria">
-                                Informática e comunicação
-                            </div>
-                        </div>
-                        <div class="main-principal-patrimonio-card-descricao-meio">
-                            <div>
-                                <img src="{% static 'assets/icones/localizacao_branco.png' %}" alt="localização">
-                                <p class="subtitulo-medio">Escritório central</p>
-                            </div>
-                            <div>
-                                <p class="subtitulo-medio">10/12/2025</p>
-                            </div>
-                        </div>
-                        <div class="card-valores">
-                            <p class="titulo-azul">R$1.300,00</p>
-                            <div class="patrimonio-ativo">
-                                Ativo
-                            </div>
-                        </div>
-                    </div>
-                </a>
-                <a href="{% url 'descricao-ativo' %}" class="main-principal-patrimonio-card">
-                    <img class="main-principal-patrimonio-card-foto" src="{% static 'assets/auxiliar/imagem geladeira eletrolux.webp' %}" alt="">
-                    <div class="main-principal-patrimonio-card-descricao">
-                        <div class="main-principal-patrimonio-card-descricao-titulo">
-                            <div>
-                                <p class="titulo-pequeno card-titulo">Geladeira Eletrolux 59L</p>
-                                <p class="subtitulo-medio">IS000029</p>
-                            </div>
-                            <div class="botao-categoria">
-                                Móveis e utensílios
-                            </div>
-                        </div>
-                        <div class="main-principal-patrimonio-card-descricao-meio">
-                            <div>
-                                <img src="{% static 'assets/icones/localizacao_branco.png' %}" alt="localização">
-                                <p class="subtitulo-medio">Grande Leste</p>
-                            </div>
-                            <div>
-                                <p class="subtitulo-medio">08/07/2019</p>
-                            </div>
-                        </div>
-                        <div class="card-valores">
-                            <p class="titulo-azul">R$4.300,00</p>
-                            <div class="patrimonio-ativo">
-                                Ativo
-                            </div>
-                        </div>
-                    </div>
-                </a>
-                <a href="{% url 'descricao-ativo' %}" class="main-principal-patrimonio-card">
-                    <div class="sem-foto">
-                        IS001169
-                    </div>
-                    <div class="main-principal-patrimonio-card-descricao">
-                        <div class="main-principal-patrimonio-card-descricao-titulo">
-                            <div>
-                                <p class="titulo-pequeno card-titulo">Caminhonete Hilux 4x4</p>
-                                <p class="subtitulo-medio">IS001169</p>
-                            </div>
-                            <div class="botao-categoria">
-                                Veículos
-                            </div>
-                        </div>
-                        <div class="main-principal-patrimonio-card-descricao-meio">
-                            <div>
-                                <img src="{% static 'assets/icones/localizacao_branco.png' %}" alt="localização">
-                                <p class="subtitulo-medio">Santa Lúcia</p>
-                            </div>
-                            <div>
-                                <p class="subtitulo-medio">04/02/2022</p>
-                            </div>
-                        </div>
-                        <div class="card-valores">
-                            <p class="titulo-azul">R$200.300,00</p>
-                            <div class="patrimonio-inativo">
-                                Inativo
-                            </div>
-                        </div>
-                    </div>
-                </a>
-                <a href="{% url 'descricao-ativo' %}" class="main-principal-patrimonio-card">
-                    <img class="main-principal-patrimonio-card-foto" src="{% static 'assets/auxiliar/imagem hilux.jpg' %}" alt="">
-                    <div class="main-principal-patrimonio-card-descricao">
-                        <div class="main-principal-patrimonio-card-descricao-titulo">
-                            <div>
-                                <p class="titulo-pequeno card-titulo">Caminhonete Hilux 4x4</p>
-                                <p class="subtitulo-medio">IS001429</p>
-                            </div>
-                            <div class="botao-categoria">
-                                Veículos
-                            </div>
-                        </div>
-                        <div class="main-principal-patrimonio-card-descricao-meio">
-                            <div>
-                                <img src="{% static 'assets/icones/localizacao_branco.png' %}" alt="localização">
-                                <p class="subtitulo-medio">Santo Expedito</p>
-                            </div>
-                            <div>
-                                <p class="subtitulo-medio">07/12/2020</p>
-                            </div>
-                        </div>
-                        <div class="card-valores">
-                            <p class="titulo-azul">R$200.300,00</p>
-                            <div class="patrimonio-ativo">
-                                Ativo
-                            </div>
-                        </div>
-                    </div>
-                </a>
-                <a href="{% url 'descricao-ativo' %}" class="main-principal-patrimonio-card">
-                    <img class="main-principal-patrimonio-card-foto" src="{% static 'assets/auxiliar/farmall 100.png' %}" alt="">
-                    <div class="main-principal-patrimonio-card-descricao">
-                        <div class="main-principal-patrimonio-card-descricao-titulo">
-                            <div>
-                                <p class="titulo-pequeno card-titulo">Trator farmall 100</p>
-                                <p class="subtitulo-medio">IS001589</p>
-                            </div>
-                            <div class="botao-categoria">
-                                Máquinas e implementos
-                            </div>
-                        </div>
-                        <div class="main-principal-patrimonio-card-descricao-meio">
-                            <div>
-                                <img src="{% static 'assets/icones/localizacao_branco.png' %}" alt="localização">
-                                <p class="subtitulo-medio">Santa Lúcia</p>
-                            </div>
-                            <div>
-                                <p class="subtitulo-medio">14/05/2024</p>
-                            </div>
-                        </div>
-                        <div class="card-valores">
-                            <p class="titulo-azul">R$1.000.300,00</p>
-                            <div class="patrimonio-inativo">
-                                Inativo
-                            </div>
-                        </div>
-                    </div>
-                </a>
+                        </a>
+                    {% endfor %}
+                    {% else %}
+                        <p class='subtitulo-medio' style='margin-top:50px;'>NÃO EXISTEM PATRIMÔNIOS CADASTRADOS</p>
+                    {% endif %}
+                    
             </div>
         </main>
     </div>

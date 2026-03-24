@@ -138,6 +138,17 @@ header button :hover{
     filter: var(--imagem-cinza);
 }
 /* PADRÕES */
+.botao-trocar-planilha {
+    text-align: center;
+    background-color: transparent;
+    border: 1px solid var(--cinza);
+    color: var(--cinza);
+    transition: transform 0.2s ease;
+    cursor: pointer;
+}
+.botao-trocar-planilha:hover {
+    transform: scale(1.12);
+}
 .botao-alterar-tema {
     height: 30px;
     width: 40px;
@@ -702,6 +713,38 @@ main {
     padding: 10px;
     color: var(--fonte-secundaria);
 }
+/* TABELA ATIVOS */
+
+.tabela-ativos.ativo {
+    width: 100%;
+    height: auto;
+    overflow-x: auto;
+    overflow-y: auto;
+}
+.tabela-ativos.ativo tr{
+    width: 100%;
+    height: 30px;
+    transition: transform 0.2s ease;
+}
+.tabela-ativos.ativo tbody tr:hover{
+    transform: scale(1.01);
+}
+.tabela-ativos.ativo th,.tabela-ativos.ativo td {
+    font-weight: 600;
+    font-size: small;
+    text-decoration: none;
+    border: 1px solid var(--cinza);
+    text-align: center;
+    padding: 5px;
+}
+.tabela-ativos.ativo tbody td{
+    font-weight: 400;
+    color: var(--fonte-secundaria);
+}
+.tabela-ativos.ativo thead {
+    background-color: var(--background-divisoes);
+}
+
 /* CARDS */
 
 .main-principal-patrimonio {
@@ -713,7 +756,11 @@ main {
     justify-content: center;
     gap: 20px;
 }
+
 .main-principal-patrimonio-card {
+    display: none;
+}
+.main-principal-patrimonio-card .ativo{
     display: flex;
     flex-direction: column;
     justify-content: space-between;

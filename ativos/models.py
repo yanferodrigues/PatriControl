@@ -1,10 +1,6 @@
 from django.db import models
 
 class Ativos(models.Model):
-    ADESIVADO_CHOICES = [
-        ("ADESIVADO","Adesivado"),
-        ("NAO ADESIVADO", "Não adesivado"),
-    ]
     CATEGORIA_CHOICES = [
         ('MAQUINAS', 'Máquinas e implementos'),
         ('INFORMATICA', 'Informática e comunicação'),
@@ -13,29 +9,25 @@ class Ativos(models.Model):
         ('IMOVEIS', 'Imóveis'),
         ('MOVEIS', 'Móveis e utensílios'),
     ]
-    STATUS_CHOICES = [
-        ('ATIVO','Ativo'),
-        ('INATIVO','Inativo'),
-    ]
     FILIAIS_CHOICES = [
-    ('SANTA LUCIA', 'Santa Lúcia'),
-    ('GRANDE LESTE', 'Grande Leste'),
-    ('SANTO EXPEDITO', 'Santo Expedito'),
-    ('JATOBA', 'Jatobá'),
-    ('ESCRITORIO CENTRAL', 'Escritório Central'),
-    ('UBA', 'Uba'),
-]
+        ('SANTA LUCIA', 'Santa Lúcia'),
+        ('GRANDE LESTE', 'Grande Leste'),
+        ('SANTO EXPEDITO', 'Santo Expedito'),
+        ('JATOBA', 'Jatobá'),
+        ('ESCRITORIO CENTRAL', 'Escritório Central'),
+        ('UBA', 'Uba'),
+    ]
 
     foto = models.ImageField(upload_to="fotos/%Y/%m/%d", blank=True)
     codigo = models.CharField(blank=False, null=False, max_length=10)
     descricao = models.CharField(blank=False, null=False, max_length=50)
     chassi = models.CharField(blank=True, null=True, max_length=50)
     placa = models.CharField(blank=True, null=True, max_length=10)
-    adesivado = models.CharField(blank=False, null=False, choices=ADESIVADO_CHOICES)
+    adesivado = models.BooleanField(blank=False, null=False)
     auxiliar = models.CharField(blank=False, null=False, max_length=10)
     cor = models.CharField(blank=True, null=True, max_length=15)
     categoria = models.CharField(blank=False, null=False, max_length=20, choices=CATEGORIA_CHOICES)
-    status = models.CharField(blank=False, null=False, max_length=15, choices=STATUS_CHOICES)
+    ativo = models.BooleanField(blank=False, null=False, max_length=15)
     detalhamento = models.TextField(blank=True, null= True)
     localizacao = models.CharField(blank=False, null=False, max_length=20, choices=FILIAIS_CHOICES)
     responsavel = models.CharField(blank=True, null=True, max_length=50)
