@@ -65,6 +65,8 @@
             </div>
             <div class="main-principal-patrimonio">
                 {% if patrimonio %}
+                
+                <div class='opcao-cards ativo'>
                     {% for ativo in patrimonio %}
                         <a href="{% url 'descricao-ativo' %}" class="main-principal-patrimonio-card">
                             <div style='display: flex; justify-content:center; margin-bottom: 10px;'>
@@ -118,15 +120,15 @@
                                             Não informado
                                         {% endif %}
                                     </p>
-                                        {% if status %}
-                                        <div class="patrimonio-ativo">
-                                            Ativo
-                                        </div>
-                                        {% else %}
-                                        <div class="patrimonio-inativo">
-                                            Inativo
-                                        </div>
-                                        {% endif %}
+                                    {% if ativo.ativo %}
+                                    <div class="patrimonio-ativo">
+                                        Ativo
+                                    </div>
+                                    {% else %}
+                                    <div class="patrimonio-inativo">
+                                        Inativo
+                                    </div>
+                                    {% endif %}
                                 </div>
                             </div>
                         </a>
@@ -134,6 +136,7 @@
                     {% else %}
                         <p class='subtitulo-medio' style='margin-top:50px;'>NÃO EXISTEM PATRIMÔNIOS CADASTRADOS</p>
                     {% endif %}
+                </div>
                     
             </div>
         </main>

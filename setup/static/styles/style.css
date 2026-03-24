@@ -714,47 +714,21 @@ main {
     padding: 10px;
     color: var(--fonte-secundaria);
 }
-/* TABELA ATIVOS */
-.container-tabela {
-    min-width: 90%;
-    height: 1000px;
-    overflow-x:auto;
-}
-.tabela-ativos {
-    width: 1000px;
-    height: auto;
-    transition: opacity 0.3s ease;
-}
-
-.tabela-ativos.ativo tr{
-    width: 100%;
-    height: 30px;
-    transition: transform 0.2s ease;
-}
-.tabela-ativos.ativo tbody tr:hover{
-    transform: scale(1.01);
-}
-.tabela-ativos.ativo th,.tabela-ativos.ativo td {
-    font-weight: 600;
-    font-size: small;
-    text-decoration: none;
-    border: 1px solid var(--cinza);
-    text-align: center;
-    padding: 5px;
-}
-.tabela-ativos.ativo tbody td{
-    font-weight: 400;
-    color: var(--fonte-secundaria);
-}
-.tabela-ativos.ativo thead {
-    background-color: var(--background-divisoes);
-}
 
 /* CARDS */
 
+.opcao-cards.ativo {
+    display: flex;
+    height: auto;
+    width: 100%;
+    justify-content:center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
 .main-principal-patrimonio {
     display: flex;
-    flex-direction: column;
     padding: 30px;
     height: auto;
     width: 100%;
@@ -769,23 +743,11 @@ main {
     border-radius: var(--arredondamento);
     border: var(--borda-clara);
     width: 350px;
-    height: 450px;
+    height: 500px;
     padding: 15px;
     background-color: var(--background-divisoes);
     transition: transform 0.2s ease;
-}
-
-.main-principal-patrimonio-card.ativo{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    border-radius: var(--arredondamento);
-    border: var(--borda-clara);
-    width: 350px;
-    height: 450px;
-    padding: 15px;
-    background-color: var(--background-divisoes);
-    transition: transform 0.2s ease;
+    padding: 20px;
 }
 .main-principal-patrimonio-card:hover{
     transform: scale(1.04);
