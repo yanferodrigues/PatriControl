@@ -714,8 +714,64 @@ main {
     padding: 10px;
     color: var(--fonte-secundaria);
 }
+/* TABELA ATIVOS */
+.opcao-tabela {
+    display: none;
+}
+.opcao-tabela.ativo{
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: auto;
+    display: block;
+    height: 800px;
+}
+
+.tabela-ativos {
+    min-width: 100%;
+    border-collapse: collapse;
+}
+
+
+.tabela-ativos thead {
+    background-color: var(--background-divisoes);
+}
+
+.tabela-ativos th,
+.tabela-ativos td {
+    border: 1px solid var(--cinza);
+    padding: 6px;
+    font-size: 12px;
+    text-align: center;
+    white-space: nowrap; 
+}
+
+.tabela-ativos tbody td {
+    font-weight: 400;
+    color: var(--fonte-secundaria);
+}
+
+.tabela-ativos tbody tr {
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+.tabela-ativos tbody tr:hover {
+    transform: scale(1.01);
+}
+
+.opcao-tabela::-webkit-scrollbar {
+    height: 6px;
+}
+
+.opcao-tabela::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
 
 /* CARDS */
+.opcao-cards {
+    display: none;
+}
 
 .opcao-cards.ativo {
     display: flex;
@@ -729,6 +785,7 @@ main {
 
 .main-principal-patrimonio {
     display: flex;
+    flex-direction: column;
     padding: 30px;
     height: auto;
     width: 100%;
@@ -796,8 +853,11 @@ main {
 }
 .card-valores {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: end;
     justify-content: space-between;
+    gap: 5px;
+    flex-wrap: wrap;
 }
 .patrimonio-ativo {
     display: flex;
@@ -1084,6 +1144,7 @@ main {
     }
 }
 @media screen and (max-width:1180px){
+
     .main-principal-patrimonio-card {
         width: 330px;
     }
@@ -1133,6 +1194,7 @@ main {
 }
 
 @media screen and (max-width:740px){
+    
     .main-principal-patrimonio-card {
         width: 90%;
     }

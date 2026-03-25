@@ -15,14 +15,34 @@ function irPara(pagina) {
 }
 
 function alterarVisualizacao() {
-    const cards = document.querySelectorAll(".main-principal-patrimonio-card")
-    const planilha = document.querySelector(".tabela-ativos")
+    const cards = document.querySelector(".opcao-cards");
+    const planilha = document.querySelector(".opcao-tabela");
 
-    cards.forEach(card => {
-        card.classList.toggle("ativo")
-    })
+    const estaTabelaAtiva = planilha.classList.contains("ativo");
 
-    planilha.classList.toggle("ativo")
+    if (estaTabelaAtiva) {
+        planilha.classList.remove("ativo");
+
+        cards.classList.add("ativo");
+    } else {
+        planilha.classList.add("ativo");
+
+        cards.classList.remove("ativo");
+    }
 }
 
+const tabela = document.querySelector(".opcao-tabela");
+const cards = document.querySelector(".opcao-cards");
 
+function controlarTabela() {
+    if (window.innerWidth <= 768) {
+        tabela.classList.remove("ativo");
+        cards.classList.add("ativo");
+    } else {
+        tabela.classList.add("ativo");
+        cards.classList.remove("ativo");
+    }
+}
+
+window.addEventListener("resize", controlarTabela);
+window.addEventListener("load", controlarTabela);

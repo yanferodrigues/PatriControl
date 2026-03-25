@@ -66,7 +66,7 @@
             <div class="main-principal-patrimonio">
                 {% if patrimonio %}
                 <button class="botao-trocar-planilha" onclick="alterarVisualizacao()">///</button>
-                <div class='opcao-tabela ativo'>    
+                <div class='opcao-tabela'>    
                     <table class="tabela-ativos">
                         <thead>
                             <tr>
@@ -111,7 +111,7 @@
                     </table>
                 </div>
                 
-                <div class='opcao-cards'>
+                <div class='opcao-cards ativo'>
                     {% for ativo in patrimonio %}
                         <a href="{% url 'descricao-ativo' %}" class="main-principal-patrimonio-card">
                             <div style='display: flex; justify-content:center; margin-bottom: 10px;'>
