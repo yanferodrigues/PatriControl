@@ -145,6 +145,7 @@ header button :hover{
     color: var(--cinza);
     transition: transform 0.2s ease;
     cursor: pointer;
+    width: 30px;
 }
 .botao-trocar-planilha:hover {
     transform: scale(1.12);
@@ -713,64 +714,40 @@ main {
     padding: 10px;
     color: var(--fonte-secundaria);
 }
-/* TABELA ATIVOS */
-
-.tabela-ativos.ativo {
-    width: 100%;
-    height: auto;
-    overflow-x: auto;
-    overflow-y: auto;
-}
-.tabela-ativos.ativo tr{
-    width: 100%;
-    height: 30px;
-    transition: transform 0.2s ease;
-}
-.tabela-ativos.ativo tbody tr:hover{
-    transform: scale(1.01);
-}
-.tabela-ativos.ativo th,.tabela-ativos.ativo td {
-    font-weight: 600;
-    font-size: small;
-    text-decoration: none;
-    border: 1px solid var(--cinza);
-    text-align: center;
-    padding: 5px;
-}
-.tabela-ativos.ativo tbody td{
-    font-weight: 400;
-    color: var(--fonte-secundaria);
-}
-.tabela-ativos.ativo thead {
-    background-color: var(--background-divisoes);
-}
 
 /* CARDS */
+
+.opcao-cards.ativo {
+    display: flex;
+    height: auto;
+    width: 100%;
+    justify-content:center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
 
 .main-principal-patrimonio {
     display: flex;
     padding: 30px;
     height: auto;
     width: 100%;
-    flex-wrap: wrap;
     justify-content: center;
+    align-items: center;
     gap: 20px;
 }
-
-.main-principal-patrimonio-card {
-    display: none;
-}
-.main-principal-patrimonio-card .ativo{
+.main-principal-patrimonio-card{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     border-radius: var(--arredondamento);
     border: var(--borda-clara);
     width: 350px;
-    height: 450px;
+    height: 500px;
     padding: 15px;
     background-color: var(--background-divisoes);
     transition: transform 0.2s ease;
+    padding: 20px;
 }
 .main-principal-patrimonio-card:hover{
     transform: scale(1.04);
@@ -819,6 +796,7 @@ main {
 }
 .card-valores {
     display: flex;
+    align-items: center;
     justify-content: space-between;
 }
 .patrimonio-ativo {
@@ -830,6 +808,7 @@ main {
     background-color: var(--verde-escuro);
     border-radius: var(--arredondamento);
     font-weight: 300;
+    height: 30px;
 }
 .patrimonio-inativo {
     display: flex;
@@ -840,6 +819,7 @@ main {
     background-color: var(--vermelho-escuro);
     border-radius: var(--arredondamento);
     font-weight: 300;
+    height: 30px;
 }
 /****************** NOVO PATRIMONIO *******************/
 
@@ -1105,7 +1085,7 @@ main {
 }
 @media screen and (max-width:1180px){
     .main-principal-patrimonio-card {
-        width: 300px;
+        width: 330px;
     }
     .main-principal-index {
         flex-direction: column;

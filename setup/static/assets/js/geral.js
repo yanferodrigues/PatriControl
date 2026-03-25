@@ -15,24 +15,18 @@ function irPara(pagina) {
 }
 
 function alterarVisualizacao() {
-    const cards = document.querySelectorAll(".main-principal-patrimonio-card-geral");
-    const planilha = document.querySelector(".tabela-ativos");
+    const cards = document.querySelector(".opcao-cards");
+    const planilha = document.querySelector(".opcao-tabela");
 
     const estaTabelaAtiva = planilha.classList.contains("ativo");
 
     if (estaTabelaAtiva) {
-        // VOLTA PRA CARD
         planilha.classList.remove("ativo");
 
-        cards.forEach(card => {
-            card.classList.add("ativo");
-        });
+        cards.classList.add("ativo");
     } else {
-        // VAI PRA TABELA
         planilha.classList.add("ativo");
 
-        cards.forEach(card => {
-            card.classList.remove("ativo");
-        });
+        cards.classList.remove("ativo");
     }
 }

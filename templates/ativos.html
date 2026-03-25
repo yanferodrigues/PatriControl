@@ -65,8 +65,53 @@
             </div>
             <div class="main-principal-patrimonio">
                 {% if patrimonio %}
+                <button class="botao-trocar-planilha" onclick="alterarVisualizacao()">///</button>
+                <div class='opcao-tabela ativo'>    
+                    <table class="tabela-ativos">
+                        <thead>
+                            <tr>
+                                <th>LOCALIZAÇÃO</th>
+                                <th>CÓDIGO</th>
+                                <th>CÓDIGO AUXILIAR</th>
+                                <th>DESCRIÇÃO</th>
+                                <th>CATEGORIA</th>
+                                <th>PLACA</th>
+                                <th>CHASSI</th>
+                                <th>Nº DA NOTA</th>
+                                <th>FORNECEDOR</th>
+                                <th>DATA DE EMISSÃO DA NOTA</th>
+                                <th>VALOR</th>
+                                <th>ADESIVADO</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for ativo in patrimonio %}
+                            <tr onclick="window.location.href='{% url 'descricao-ativo'%}'" style="cursor: pointer;">
+                                <td>{{ ativo.localizacao|upper }}</td>
+                                <td>{{ ativo.codigo|upper }}</td>
+                                <td>{{ ativo.auxiliar|upper }}</td>
+                                <td>{{ ativo.descricao|upper }}</td>
+                                <td>{{ ativo.categoria|upper }}</td>
+                                <td>{{ ativo.placa|upper }}</td>
+                                <td>{{ ativo.chassi|upper }}</td>
+                                <td>{{ ativo.numero_nota|upper }}</td>
+                                <td>{{ ativo.fornecedor|upper }}</td>
+                                <td>{{ ativo.incorporacao|upper }}</td>
+                                <td>R$ {{ ativo.valor|intcomma }}</td>
+                                <td>
+                                    {% if ativo.adesivado %}
+                                        ADESIVADO
+                                    {% else %}
+                                        -
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
                 
-                <div class='opcao-cards ativo'>
+                <div class='opcao-cards'>
                     {% for ativo in patrimonio %}
                         <a href="{% url 'descricao-ativo' %}" class="main-principal-patrimonio-card">
                             <div style='display: flex; justify-content:center; margin-bottom: 10px;'>
@@ -133,9 +178,9 @@
                             </div>
                         </a>
                     {% endfor %}
-                    {% else %}
-                        <p class='subtitulo-medio' style='margin-top:50px;'>NÃO EXISTEM PATRIMÔNIOS CADASTRADOS</p>
-                    {% endif %}
+                {% else %}
+                    <p class='subtitulo-medio' style='margin-top:50px;'>NÃO EXISTEM PATRIMÔNIOS CADASTRADOS</p>
+                {% endif %}
                 </div>
                     
             </div>
