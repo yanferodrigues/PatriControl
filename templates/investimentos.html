@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load humanize %}
 {% block content %}
             <nav class="navegacao-aside">
                 <a href="{% url 'index' %}">
@@ -48,101 +49,80 @@
                 </select>
             </div>
             <div class="main-principal-patrimonio">
-                <a href="descricao ativo.html" class="main-principal-patrimonio-card">
-                    <div class="sem-foto">
-                        INV-098
+                {% if investimentos %}
+                    <button class="botao-trocar-planilha" onclick="alterarVisualizacao()">///</button>
+                    <div class='opcao-tabela'>    
+                        <table class="tabela-ativos">
+                            <thead>
+                                <tr>
+                                    <th>LOCALIZAÇÃO</th>
+                                    <th>CÓDIGO</th>
+                                    <th>DESCRIÇÃO</th>
+                                    <th>DATA DE CRIAÇÃO</th>
+                                    <th>VALOR</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for investimento in investimentos %}
+                                    <tr style="cursor: pointer;">
+                                        <td>{{ investimento.localizacao|upper }}</td>
+                                        <td>{{ investimento.codigo|upper }}</td>
+                                        <td>{{ investimento.descricao|upper }}</td>
+                                        <td>{{ investimento.data|upper }}</td>
+                                        <td>R$ {{ investimento.valor|intcomma }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
                     </div>
-                    <div class="main-principal-patrimonio-card-descricao">
-                        <div class="main-principal-patrimonio-card-descricao-titulo">
-                            <div>
-                                <p class="titulo-pequeno card-titulo">Poços artesianos / SL</p>
-                                <p class="subtitulo-medio">INV-098</p>
-                            </div>
-                            <div class="botao-categoria">
-                                Investimentos
-                            </div>
-                        </div>
-                        <div class="main-principal-patrimonio-card-descricao-meio">
-                            <div>
-                                <img src="{% static 'assets/icones/localizacao_branco.png' %}" alt="localização">
-                                <p class="subtitulo-medio">Santa Lúcia</p>
-                            </div>
-                            <div>
-                                <p class="subtitulo-medio">14/05/2024</p>
-                            </div>
-                        </div>
-                        <div class="card-valores">
-                            <p class="titulo-azul">R$3.500.300,00</p>
-                            <div class="patrimonio-ativo">
-                                Ativo
-                            </div>
-                        </div>
+                    
+                    <div class='opcao-cards ativo'>
+                        {% for investimento in investimentos %}
+                            <a class="main-principal-patrimonio-card">
+                                <div class="sem-foto">
+                                    {{investimento.codigo|upper}}
+                                </div>
+                                <div class="main-principal-patrimonio-card-descricao">
+                                    <div class="main-principal-patrimonio-card-descricao-meio">
+                                        <div>
+                                            <img src="{% static 'assets/icones/localizacao_branco.png' %}" alt="localização">
+                                            <p class="subtitulo-medio">{{investimento.localizacao|title}}</p>
+                                        </div>
+                                        <div>
+                                            <p class="subtitulo-medio">
+                                                {% if investimento.data %}
+                                                    {{investimento.data|date:"d/m/Y"}}
+                                                {% else %}
+                                                    Não informado
+                                                {% endif %}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="card-valores">
+                                        <p class="titulo-azul">
+                                            {% if investimento.valor %}
+                                                R$ {{ investimento.valor|intcomma }}
+                                            {% else %}
+                                                Não informado
+                                            {% endif %}
+                                        </p>
+                                        {% if investimento.ativo %}
+                                        <div class="patrimonio-ativo">
+                                            Ativo
+                                        </div>
+                                        {% else %}
+                                        <div class="patrimonio-inativo">
+                                            Inativo
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </a>
+                        {% endfor %}
                     </div>
-                </a>
-                <a href="descricao ativo.html" class="main-principal-patrimonio-card">
-                    <div class="sem-foto">
-                        INV-063
-                    </div>
-                    <div class="main-principal-patrimonio-card-descricao">
-                        <div class="main-principal-patrimonio-card-descricao-titulo">
-                            <div>
-                                <p class="titulo-pequeno card-titulo" title="Celular samsung Galaxy A35">PIVO CENTRAL/GL</p>
-                                <p class="subtitulo-medio">INV-063</p>
-                            </div>
-                            <div class="botao-categoria">
-                                Investimento
-                            </div>
-                        </div>
-                        <div class="main-principal-patrimonio-card-descricao-meio">
-                            <div>
-                                <img src="{% static 'assets/icones/localizacao_branco.png' %}" alt="localização">
-                                <p class="subtitulo-medio">Grande Leste</p>
-                            </div>
-                            <div>
-                                <p class="subtitulo-medio">10/12/2025</p>
-                            </div>
-                        </div>
-                        <div class="card-valores">
-                            <p class="titulo-azul">R$644.300,00</p>
-                            <div class="patrimonio-ativo">
-                                Ativo
-                            </div>
-                        </div>
-                    </div>
-                </a>
-                
-                <a href="descricao ativo.html" class="main-principal-patrimonio-card">
-                   <div class="sem-foto">
-                        INV-123
-                    </div>
-                    <div class="main-principal-patrimonio-card-descricao">
-                        <div class="main-principal-patrimonio-card-descricao-titulo">
-                            <div>
-                                <p class="titulo-pequeno card-titulo">UBS/SL</p>
-                                <p class="subtitulo-medio">INV-123</p>
-                            </div>
-                            <div class="botao-categoria">
-                                Investimentos
-                            </div>
-                        </div>
-                        <div class="main-principal-patrimonio-card-descricao-meio">
-                            <div>
-                                <img src="{% static 'assets/icones/localizacao_branco.png' %}" alt="localização">
-                                <p class="subtitulo-medio">Santa Lúcia</p>
-                            </div>
-                            <div>
-                                <p class="subtitulo-medio">14/05/2024</p>
-                            </div>
-                        </div>
-                        <div class="card-valores">
-                            <p class="titulo-azul">R$1.000.300,00</p>
-                            <div class="patrimonio-inativo">
-                                Inativo
-                            </div>
-                        </div>
-                    </div>
-                </a>
-                
+                {% else %}
+                    <p class='subtitulo-medio' style='margin-top:50px;'>NÃO EXISTEM PATRIMÔNIOS CADASTRADOS</p>
+                {% endif %}
             </div>
         </main>
     </div>

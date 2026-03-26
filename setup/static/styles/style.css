@@ -201,11 +201,10 @@ input,select {
     border: var(--borda-clara);
     border-radius: var(--arredondamento);
     font-size: smaller;
-    padding: 1px;
-    width: 100px;
-    height: auto;
+    padding: 5px;
+    min-width: 80px;
+    max-width: 150px;
     color: var(--fonte-secundaria);
-    width: 120px;
     height: 50px;
     text-align: center;
 }
@@ -562,12 +561,12 @@ main {
 .main-principal-index-card-direita-ativos-self {
     height: 72px;
     display: flex;
-    justify-content: start;
+    justify-content: space-between;
     align-items: center;
-    gap:20px;
+    gap:10px;
     transition: transform 0.2s ease;
     border-radius: var(--arredondamento);
-    padding: 5px;
+    padding: 5px 50px 5px 5px;
 }
 .main-principal-index-card-direita-ativos-self:hover {
     transform: scale(1.02);
@@ -575,7 +574,7 @@ main {
 }
 .main-principal-index-card-direita-ativos-self-extras {
     display: flex;
-    gap: 20px;
+    gap: 7px;
 }
 
 /* ICONES CARDS */
@@ -829,7 +828,7 @@ main {
     gap: 3px;
 }
 .card-titulo {
-    width: 180px;
+    width: 150px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -1194,7 +1193,12 @@ main {
 }
 
 @media screen and (max-width:740px){
-    
+    .card-titulo {
+        width: 200px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
     .main-principal-patrimonio-card {
         width: 90%;
     }

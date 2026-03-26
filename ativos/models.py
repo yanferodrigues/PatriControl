@@ -2,12 +2,11 @@ from django.db import models
 
 class Ativos(models.Model):
     CATEGORIA_CHOICES = [
-        ('MAQUINAS', 'Máquinas e implementos'),
-        ('INFORMATICA', 'Informática e comunicação'),
-        ('VEICULOS', 'Veículos'),
-        ('EQUIPAMENTOS', 'Equipamentos diversos'),
-        ('IMOVEIS', 'Imóveis'),
-        ('MOVEIS', 'Móveis e utensílios'),
+        ('MÁQUINAS E IMPLEMENTOS', 'Máquinas e implementos'),
+        ('INFORMÁTICA E COMUNICAÇÃO', 'Informática e comunicação'),
+        ('VEÍCULOS', 'Veículos'),
+        ('EQUIPAMENTOS DIVERSOS', 'Equipamentos diversos'),
+        ('MÓVEIS E UTENSÍLIOS', 'Móveis e utensílios'),
     ]
     FILIAIS_CHOICES = [
         ('SANTA LUCIA', 'Santa Lúcia'),
@@ -26,7 +25,7 @@ class Ativos(models.Model):
     adesivado = models.BooleanField(blank=False, null=False)
     auxiliar = models.CharField(blank=False, null=False, max_length=10)
     cor = models.CharField(blank=True, null=True, max_length=15)
-    categoria = models.CharField(blank=False, null=False, max_length=20, choices=CATEGORIA_CHOICES)
+    categoria = models.CharField(blank=False, null=False, max_length=50, choices=CATEGORIA_CHOICES)
     ativo = models.BooleanField(blank=False, null=False, max_length=15)
     detalhamento = models.TextField(blank=True, null= True)
     localizacao = models.CharField(blank=False, null=False, max_length=20, choices=FILIAIS_CHOICES)

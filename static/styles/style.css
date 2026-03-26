@@ -562,9 +562,10 @@ main {
 .main-principal-index-card-direita-ativos-self {
     height: 72px;
     display: flex;
-    justify-content: start;
+    justify-content: space-between;
     align-items: center;
-    gap:20px;
+    padding-right: 50px;
+    gap:50px;
     transition: transform 0.2s ease;
     border-radius: var(--arredondamento);
     padding: 5px;

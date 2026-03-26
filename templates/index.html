@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load humanize %}
 {% block content %}
             <nav class="navegacao-aside">
                 <a class="link-ativo" href="{% url 'index' %}">
@@ -39,54 +40,62 @@
                 </button>
             </div>
             <div class="main-meio-index">
-                <a class="main-meio-index-card">
-                    <div class="main-meio-index-card-informacoes">
-                        <p class="subtitulo-medio">Total de Patrimônios</p>
-                        <p class="titulo-grande">1530</p>
-                        <p class="subtitulo-pequeno">Cadastrados</p>
-                    </div>
-                    <div>
-                        <div class="icone-cards azul">
-                            <img src="{% static 'assets/icones/patrimonio_branco.png' %}" alt="quantidade patrimonio">
+                {% if ativos %}
+                    <a class="main-meio-index-card">
+                        <div class="main-meio-index-card-informacoes">
+                            <p class="subtitulo-medio">Total de Patrimônios</p>
+                            <p class="titulo-grande">{{ ativos|length }}</p>
+                            <p class="subtitulo-pequeno">Cadastrados</p>
                         </div>
-                    </div>
-                </a>
-                <a class="main-meio-index-card">
-                    <div class="main-meio-index-card-informacoes">
-                        <p class="subtitulo-medio">Total em valor de ativos</p>
-                        <p class="titulo-grande">R$ 200.000.000,00</p>
-                        <p class="subtitulo-pequeno">Com notas lançadas</p>
-                    </div>
-                    <div>
-                        <div class="icone-cards roxo">
-                            <img src="{% static 'assets/icones/dinheiro_branco.png' %}" alt="quantidade patrimonio">
+                        <div>
+                            <div class="icone-cards azul">
+                                <img src="{% static 'assets/icones/patrimonio_branco.png' %}" alt="quantidade patrimonio">
+                            </div>
                         </div>
-                    </div>
-                </a>
-                <a class="main-meio-index-card">
-                    <div class="main-meio-index-card-informacoes">
-                        <p class="subtitulo-medio">Total de imóveis</p>
-                        <p class="titulo-grande">50</p>
-                        <p class="subtitulo-pequeno">Cadastrados</p>
-                    </div>
-                    <div>
-                        <div class="icone-cards verde">
-                            <img src="{% static 'assets/icones/imovel_branco.png' %}" alt="quantidade patrimonio">
+                    </a>
+                {% endif %}
+                {% if valor_total_ativos %}
+                    <a class="main-meio-index-card">
+                        <div class="main-meio-index-card-informacoes">
+                            <p class="subtitulo-medio">Total em valor de ativos</p>
+                            <p class="titulo-grande">R$ {{ valor_total_ativos | intcomma }}</p>
+                            <p class="subtitulo-pequeno">Com notas lançadas</p>
                         </div>
-                    </div>
-                </a>
-                <a class="main-meio-index-card">
-                    <div class="main-meio-index-card-informacoes">
-                        <p class="subtitulo-medio">Total em valor de imóveis</p>
-                        <p class="titulo-grande">R$ 100.000.000,00</p>
-                        <p class="subtitulo-pequeno">Investimentos finalizados</p>
-                    </div>
-                    <div>
-                        <div class="icone-cards amarelo">
-                            <img src="{% static 'assets/icones/dinheiro_branco.png' %}" alt="quantidade patrimonio">
+                        <div>
+                            <div class="icone-cards roxo">
+                                <img src="{% static 'assets/icones/dinheiro_branco.png' %}" alt="quantidade patrimonio">
+                            </div>
                         </div>
-                    </div>
-                </a>
+                    </a>
+                {% endif %}
+                {% if investimentos %}
+                    <a class="main-meio-index-card">
+                        <div class="main-meio-index-card-informacoes">
+                            <p class="subtitulo-medio">Total de imóveis</p>
+                            <p class="titulo-grande">{{ investimentos|length }}</p>
+                            <p class="subtitulo-pequeno">Cadastrados</p>
+                        </div>
+                        <div>
+                            <div class="icone-cards verde">
+                                <img src="{% static 'assets/icones/imovel_branco.png' %}" alt="quantidade patrimonio">
+                            </div>
+                        </div>
+                    </a>
+                {% endif %}
+                {% if valor_total_investimentos %}
+                    <a class="main-meio-index-card">
+                        <div class="main-meio-index-card-informacoes">
+                            <p class="subtitulo-medio">Total em valor de imóveis</p>
+                            <p class="titulo-grande">R$ {{ valor_total_investimentos|intcomma }}</p>
+                            <p class="subtitulo-pequeno">Apontados em investimentos </p>
+                        </div>
+                        <div>
+                            <div class="icone-cards amarelo">
+                                <img src="{% static 'assets/icones/dinheiro_branco.png' %}" alt="quantidade patrimonio">
+                            </div>
+                        </div>
+                    </a>
+                {% endif %}
             </div>
             <div class="main-principal-index">
                 <div class="main-principal-index-card-esquerda">
@@ -102,125 +111,61 @@
                         <a class="subtitulo-pequeno ver-todos" href="{% url 'ativos' %}">Ver todos</a>
                     </div>
                     <div class="main-principal-index-card-direita-ativos">
-                        <a href="{% url 'descricao-ativo' %}" class="main-principal-index-card-direita-ativos-self">
-                            <div class="icone-cards self-ativo azul">
-                                <img src="{% static 'assets/icones/carro_branco.png' %}" alt="quantidade patrimonio">
-                            </div>
-                            <div>
-                                <div class="main-principal-index-card-direita-ativos-self-titulo">
-                                    <p>Caminhonete Hilux</p>
-                                </div>
-                                <div class="main-principal-index-card-direita-ativos-self-extras">
-                                    <p class="subtitulo-pequeno">IS001376</p>
-                                    <p class="subtitulo-pequeno">-</p>
-                                    <p class="subtitulo-pequeno">Veículos</p>
-                                    <p class="subtitulo-pequeno">-</p>
-                                    <p class="subtitulo-pequeno"> Santa lúcia </p>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="{% url 'descricao-ativo' %}" class="main-principal-index-card-direita-ativos-self">
-                            <div class="icone-cards self-ativo amarelo">
-                                <img src="{% static 'assets/icones/computador_branco.png' %}" alt="quantidade patrimonio">
-                            </div>
-                            <div>
-                                <div class="main-principal-index-card-direita-ativos-self-titulo">
-                                    <p>Celular Samsung Galaxy</p>
-                                </div>
-                                <div class="main-principal-index-card-direita-ativos-self-extras">
-                                    <p class="subtitulo-pequeno">IS001478</p>
-                                    <p class="subtitulo-pequeno">-</p>
-                                    <p class="subtitulo-pequeno">Informática e comunicação</p>
-                                    <p class="subtitulo-pequeno">-</p>
-                                    <p class="subtitulo-pequeno">Escritório central</p>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="{% url 'descricao-ativo' %}" class="main-principal-index-card-direita-ativos-self">
-                            <div class="icone-cards self-ativo roxo">
-                                <img src="{% static 'assets/icones/sofá_branco.png' %}" alt="quantidade patrimonio">
-                            </div>
-                            <div>
-                                <div class="main-principal-index-card-direita-ativos-self-titulo">
-                                    <p>Geladeira Eletrolux</p>
-                                </div>
-                                <div class="main-principal-index-card-direita-ativos-self-extras">
-                                    <p class="subtitulo-pequeno">IS001502</p>
-                                    <p class="subtitulo-pequeno">-</p>
-                                    <p class="subtitulo-pequeno">Móveis e utensílios</p>
-                                    <p class="subtitulo-pequeno">-</p>
-                                    <p class="subtitulo-pequeno">Escritório central</p>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="{% url 'descricao-ativo' %}" class="main-principal-index-card-direita-ativos-self">
-                            <div class="icone-cards self-ativo vermelho">
-                                <img src="{% static 'assets/icones/trator_branco.png' %}" alt="quantidade patrimonio">
-                            </div>
-                            <div>
-                                <div class="main-principal-index-card-direita-ativos-self-titulo">
-                                    <p>Trator Case Farmall 100</p>
-                                </div>
-                                <div class="main-principal-index-card-direita-ativos-self-extras">
-                                    <p class="subtitulo-pequeno">IS001200</p>
-                                    <p class="subtitulo-pequeno">-</p>
-                                    <p class="subtitulo-pequeno">Maquinas e implementos</p>
-                                    <p class="subtitulo-pequeno">-</p>
-                                    <p class="subtitulo-pequeno">Grande Leste</p>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="{% url 'descricao-ativo' %}" class="main-principal-index-card-direita-ativos-self">
-                            <div class="icone-cards self-ativo amarelo">
-                                <img src="{% static 'assets/icones/computador_branco.png' %}" alt="quantidade patrimonio">
-                            </div>
-                            <div>
-                                <div class="main-principal-index-card-direita-ativos-self-titulo">
-                                    <p>Rádio Itera 200</p>
-                                </div>
-                                <div class="main-principal-index-card-direita-ativos-self-extras">
-                                    <p class="subtitulo-pequeno">IS000100</p>
-                                    <p class="subtitulo-pequeno">-</p>
-                                    <p class="subtitulo-pequeno">Informática e comunicação</p>
-                                    <p class="subtitulo-pequeno">-</p>
-                                    <p class="subtitulo-pequeno">Grande Leste</p>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="{% url 'descricao-ativo' %}" class="main-principal-index-card-direita-ativos-self">
-                            <div class="icone-cards self-ativo vermelho">
-                                <img src="{% static 'assets/icones/trator_branco.png' %}" alt="quantidade patrimonio">
-                            </div>
-                            <div>
-                                <div class="main-principal-index-card-direita-ativos-self-titulo">
-                                    <p>Trator Case Farmall 100</p>
-                                </div>
-                                <div class="main-principal-index-card-direita-ativos-self-extras">
-                                    <p class="subtitulo-pequeno">IS001165</p>
-                                    <p class="subtitulo-pequeno">-</p>
-                                    <p class="subtitulo-pequeno">Maquinas e implementos</p>
-                                    <p class="subtitulo-pequeno">-</p>
-                                    <p class="subtitulo-pequeno">Grande Leste</p>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="{% url 'descricao-ativo' %}" class="main-principal-index-card-direita-ativos-self">
-                            <div class="icone-cards self-ativo azul">
-                                <img src="{% static 'assets/icones/carro_branco.png' %}" alt="quantidade patrimonio">
-                            </div>
-                            <div>
-                                <div class="main-principal-index-card-direita-ativos-self-titulo">
-                                    <p>Caminhonete Hilux</p>
-                                </div>
-                                <div class="main-principal-index-card-direita-ativos-self-extras">
-                                    <p class="subtitulo-pequeno">IS001456</p>
-                                    <p class="subtitulo-pequeno">-</p>
-                                    <p class="subtitulo-pequeno">Veículos</p>
-                                    <p class="subtitulo-pequeno">-</p>
-                                    <p class="subtitulo-pequeno"> Santa lúcia </p>
-                                </div>
-                            </div>
-                        </a>
+                        {% if ativos %}
+                            {% for ativo in ativos %}
+                                <a href="{% url 'descricao-ativo' %}" class="main-principal-index-card-direita-ativos-self">
+                                    <div style="display:flex; gap:30px;">
+                                        {% if ativo.categoria == "VEÍCULOS" %}
+                                            <div class="icone-cards self-ativo azul">
+                                                <img src="{% static 'assets/icones/carro_branco.png' %}" alt="quantidade patrimonio">
+                                            </div>
+                                        {% elif ativo.categoria == "EQUIPAMENTOS DIVERSOS" %}
+                                            <div class="icone-cards self-ativo verde">
+                                                <img src="{% static 'assets/icones/furadeira_branca.png' %}" alt="quantidade patrimonio">
+                                            </div>
+                                        {% elif ativo.categoria == "MÁQUINAS" %}
+                                            <div class="icone-cards self-ativo vermelho">
+                                                <img src="{% static 'assets/icones/trator_branco.png' %}" alt="quantidade patrimonio">
+                                            </div>
+                                        {% elif ativo.categoria == "INFORMÁTICA E COMUNICAÇÃO" %}
+                                            <div class="icone-cards self-ativo amarelo">
+                                                <img src="{% static 'assets/icones/computador_branco.png' %}" alt="quantidade patrimonio">
+                                            </div>
+                                        {% elif ativo.categoria == "MÓVEIS E UTENSÍLIOS" %}
+                                            <div class="icone-cards self-ativo roxo">
+                                                <img src="{% static 'assets/icones/sofa_branco.png' %}" alt="quantidade patrimonio">
+                                            </div>
+                                        {% endif %}
+
+                                        <div>
+                                            <div class="main-principal-index-card-direita-ativos-self-titulo">
+                                                <p>{{ ativo.descricao}}</p>
+                                            </div>
+                                            <div class="main-principal-index-card-direita-ativos-self-extras">
+                                                <p class="subtitulo-pequeno">{{ ativo.codigo }}</p>
+                                                <p class="subtitulo-pequeno">-</p>
+                                                <p class="subtitulo-pequeno">{{ ativo.categoria }}</p>
+                                                <p class="subtitulo-pequeno">-</p>
+                                                <p class="subtitulo-pequeno">{{ ativo.localizacao }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    {% if ativo.ativo %}
+                                        <div class="patrimonio-ativo">
+                                            Ativo
+                                        </div>
+                                    {% else %}
+                                        <div class="patrimonio-inativo">
+                                            Inativo
+                                        </div>
+                                    {% endif %}
+                                    
+                                </a>
+                            {% endfor %}
+                        {% else %}
+                            <p class='subtitulo-medio' style='margin-top:50px;'>NÃO EXISTEM PATRIMÔNIOS CADASTRADOS</p>
+                        {% endif %}
                     </div>
                 </div>
             </div>
