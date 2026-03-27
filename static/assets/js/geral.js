@@ -33,14 +33,15 @@ function alterarVisualizacao() {
 
 const tabela = document.querySelector(".opcao-tabela");
 const cards = document.querySelector(".opcao-cards");
+const botaoTrocar = document.querySelector(".botao-trocar-planilha")
 
 function controlarTabela() {
-    if (window.innerWidth <= 768) {
+    if (window.innerWidth <= 1000) {
         tabela.classList.remove("ativo");
         cards.classList.add("ativo");
+        botaoTrocar.style.display = "none"
     } else {
-        tabela.classList.add("ativo");
-        cards.classList.remove("ativo");
+        botaoTrocar.style.display = "flex"
     }
 }
 

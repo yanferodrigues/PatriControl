@@ -111,8 +111,8 @@
                         <a class="subtitulo-pequeno ver-todos" href="{% url 'ativos' %}">Ver todos</a>
                     </div>
                     <div class="main-principal-index-card-direita-ativos">
-                        {% if ativos %}
-                            {% for ativo in ativos %}
+                        {% if ativos_ultimos %}
+                            {% for ativo in ativos_ultimos %}
                                 <a href="{% url 'descricao-ativo' %}" class="main-principal-index-card-direita-ativos-self">
                                     <div style="display:flex; gap:30px;">
                                         {% if ativo.categoria == "VEÍCULOS" %}
@@ -123,7 +123,7 @@
                                             <div class="icone-cards self-ativo verde">
                                                 <img src="{% static 'assets/icones/furadeira_branca.png' %}" alt="quantidade patrimonio">
                                             </div>
-                                        {% elif ativo.categoria == "MÁQUINAS" %}
+                                        {% elif ativo.categoria == "MÁQUINAS E IMPLEMENTOS" %}
                                             <div class="icone-cards self-ativo vermelho">
                                                 <img src="{% static 'assets/icones/trator_branco.png' %}" alt="quantidade patrimonio">
                                             </div>
@@ -139,10 +139,10 @@
 
                                         <div>
                                             <div class="main-principal-index-card-direita-ativos-self-titulo">
-                                                <p>{{ ativo.descricao}}</p>
+                                                <p>{{ ativo.descricao|upper}}</p>
                                             </div>
                                             <div class="main-principal-index-card-direita-ativos-self-extras">
-                                                <p class="subtitulo-pequeno">{{ ativo.codigo }}</p>
+                                                <p class="subtitulo-pequeno">{{ ativo.codigo|upper }}</p>
                                                 <p class="subtitulo-pequeno">-</p>
                                                 <p class="subtitulo-pequeno">{{ ativo.categoria }}</p>
                                                 <p class="subtitulo-pequeno">-</p>

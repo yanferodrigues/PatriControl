@@ -15,7 +15,7 @@ const chart = new Chart(graficoDB, {
 
         datasets: [{
             label: 'Quantidade',
-            data: [0, 0, 0, 0, 0, 0], // começa zerado
+            data: [], // começa vazio
 
             backgroundColor: [
                 '#2f4cee',
@@ -45,7 +45,7 @@ const chart = new Chart(graficoDB, {
         maintainAspectRatio: false,
 
         animation: {
-            duration: 2000,
+            duration: 1500,
             easing: 'easeInOutQuart'
         },
 
@@ -53,11 +53,11 @@ const chart = new Chart(graficoDB, {
 
         plugins: {
             legend: {
-                position: 'bottom', // 👈 embaixo
+                position: 'bottom',
                 align: 'center',
 
                 labels: {
-                    usePointStyle: true, // 👈 bolinha
+                    usePointStyle: true,
                     pointStyle: 'circle',
                     boxWidth: 10,
                     padding: 15,
@@ -75,8 +75,26 @@ const chart = new Chart(graficoDB, {
     }
 });
 
-// animação real
-setTimeout(() => {
-    chart.data.datasets[0].data = [200, 450, 600, 900, 500, 60];
-    chart.update();
-}, 200);
+
+// 🔥 FUNÇÃO QUE BUSCA DO DJANGO
+function carregarGrafico() {
+    fetch('api/grafico/')  // rota do Django
+        .then(response => response.json())
+        .then(data => {
+
+            console.log("Dados do Django:", data); // debug
+
+            // 🔥 AQUI A MÁGICA ACONTECE
+            chart.data.datasets[0].data = data.valores;
+
+            chart.update();
+
+        })
+        .catch(error => console.error("Erro ao carregar gráfico:", error));
+}
+
+
+// 🔥 EXECUTA AO CARREGAR A PÁGINA
+document.addEventListener("DOMContentLoaded", () => {
+    carregarGrafico();
+});
