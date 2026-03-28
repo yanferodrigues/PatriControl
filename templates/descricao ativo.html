@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load humanize %}
 {% block content %}
             <nav class="navegacao-aside">
                 <a href="{% url 'index' %}">
@@ -25,99 +26,137 @@
             </nav>
         </aside>
         <main class="aparecer-baixo">
-            <div class="main-topo">
-                <div>
-                    <p class="titulo-grande">IS001245</p>
-                    <p class="subtitulo-medio">TRATOR FARMALL 100</p>
-                </div>
-                
-                <div style="display: flex; gap: 10px;">
+            {% if ativo %}
+                <div class="main-topo">
+                    <div>
+                        <p class="titulo-grande">{{ ativo.codigo|upper}}</p>
+                        <p class="subtitulo-medio">{{ ativo.descricao|upper }}</p>
+                    </div>
                     
-                    <button class="botao-editar">
-                        Editar
-                        <img src="{% static 'assets/icones/editar_branco.png' %}" alt="editar patrimonio">
-                    </button>
-                    <button class="botao-excluir">
-                        Excluir
-                        <img src="{% static 'assets/icones/lixeira_branca.png' %}" alt="excluir patrimonio">
-                    </button>
-                </div>
-            </div>
-            <div>
-                <div class="informacoes-patrimonio-card">
-                    <p class="titulo-pequeno">Detalhes</p>
-                    <div style="width: 100%;">
-                        <div class="sep-detalhes" style="display: flex; flex-direction: column;">
-                            <div style="display: flex; height: 30px; gap: 5px;">
-                                <img class="icone-informacoes" src="{% static 'assets/icones/etiqueta_branco.png' %}" alt="etiqueta">
-                                <p class="subtitulo-medio">Categoria</p>
-                            </div>
-                            <p> Maquinas e Equipamentos</p>
-                        </div>
-                        <div class="sep-detalhes" style="display: flex; flex-direction: column;">
-                            <div style="display: flex; height: 30px; gap: 5px;">
-                                <img class="icone-informacoes" src="{% static 'assets/icones/localizacao_branco.png' %}" alt="localização">
-                                <p class="subtitulo-medio">Localização</p>
-                            </div>
-                            <p> Santa Lúcia</p>
-                        </div>
-                        <div class="sep-detalhes" style="display: flex; flex-direction: column;">
-                            <div style="display: flex; height: 30px; gap: 5px;">
-                                <img class="icone-informacoes" src="{% static 'assets/icones/usuario_branco.png' %}" alt="responsável">
-                                <p class="subtitulo-medio">Responsável</p>
-                            </div>
-                            <p> Yan Felipe / setor de patrimônio </p>
-                        </div>
-                        <div class="sep-detalhes" style="display: flex; flex-direction: column;">
-                            <div style="display: flex; height: 30px; gap: 5px;">
-                                <img class="icone-informacoes" src="{% static 'assets/icones/calendario_branco.png' %}" alt="calendario">
-                                <p class="subtitulo-medio">Data de aquisição</p>
-                            </div>
-                            <p> 12/06/2020 </p>
-                        </div>
-                        <div class="sep-detalhes" style="display: flex; flex-direction: column;">
-                            <div style="display: flex; height: 30px; gap: 5px;">
-                                <img class="icone-informacoes" src="{% static 'assets/icones/hashtag_branco.png' %}" alt="">
-                                <p class="subtitulo-medio">Marca - modelo</p>
-                            </div>
-                            <p> CASE - FARMALL 100 </p>
-                        </div>
-                        <div class="sep-detalhes" style="display: flex; flex-direction: column;">
-                            <div style="display: flex; height: 30px; gap: 5px;">
-                                <img class="icone-informacoes" src="{% static 'assets/icones/hashtag_branco.png' %}" alt="">
-                                <p class="subtitulo-medio">Nº de série / Chassi </p>
-                            </div>
-                            <p>HCCH23VBJF33123N12</p>
-                        </div>
-                        <div class="sep-detalhes" style="display: flex; flex-direction: column;">
-                            <div style="display: flex; height: 30px; gap: 5px;">
-                                <img class="icone-informacoes" src="{% static 'assets/icones/hashtag_branco.png' %}" alt="">
-                                <p class="subtitulo-medio">Placa</p>
-                            </div>
-                            <p> SEM PLACA</p>
-                        </div>
+                    <div style="display: flex; gap: 10px;">
+                        
+                        <button class="botao-editar">
+                            Editar
+                            <img src="{% static 'assets/icones/editar_branco.png' %}" alt="editar patrimonio">
+                        </button>
+                        <button class="botao-excluir">
+                            Excluir
+                            <img src="{% static 'assets/icones/lixeira_branca.png' %}" alt="excluir patrimonio">
+                        </button>
                     </div>
                 </div>
                 <div>
-                    <div class="informacoes-patrimonio-card" style="min-height: 100px;">
-                        <p class="titulo-pequeno">Valores</p>
-                        <div class="box-valores-ativo">
-                            <div class="valores-ativo aquisicao">
-                                <p class="subtitulo-medio">Valor de aquisição</p>
-                                <p class="titulo-medio">R$4.500,00</p>
+                    <div class="informacoes-patrimonio-card">
+                        <p class="titulo-pequeno">Detalhes</p>
+                        <div style="width: 100%;">
+                            <div class="sep-detalhes" style="display: flex; flex-direction: column;">
+                                <div style="display: flex; height: 30px; gap: 5px;">
+                                    <img class="icone-informacoes" src="{% static 'assets/icones/etiqueta_branco.png' %}" alt="etiqueta">
+                                    <p class="subtitulo-medio">Categoria</p>
+                                </div>
+                                <p> {{ ativo.categoria|upper }}</p>
                             </div>
-                            <div class="valores-ativo atual">
-                                <p class="subtitulo-medio">Valor de atual</p>
-                                <p class="titulo-medio">R$3.200,00</p>
+                            <div class="sep-detalhes" style="display: flex; flex-direction: column;">
+                                <div style="display: flex; height: 30px; gap: 5px;">
+                                    <img class="icone-informacoes" src="{% static 'assets/icones/localizacao_branco.png' %}" alt="localização">
+                                    <p class="subtitulo-medio">Localização</p>
+                                </div>
+                                <p>{{ ativo.localizacao }}</p>
+                            </div>
+                            <div class="sep-detalhes" style="display: flex; flex-direction: column;">
+                                <div style="display: flex; height: 30px; gap: 5px;">
+                                    <img class="icone-informacoes" src="{% static 'assets/icones/usuario_branco.png' %}" alt="responsável">
+                                    <p class="subtitulo-medio">Responsável</p>
+                                </div>
+                                <p>{{ ativo.responsavel }}</p>
+                            </div>
+                            <div class="sep-detalhes" style="display: flex; flex-direction: column;">
+                                <div style="display: flex; height: 30px; gap: 5px;">
+                                    <img class="icone-informacoes" src="{% static 'assets/icones/calendario_branco.png' %}" alt="calendario">
+                                    <p class="subtitulo-medio">Data de aquisição</p>
+                                </div>
+                                <p>{{ ativo.incorporacao }}</p>
+                            </div>
+                            <div class="sep-detalhes" style="display: flex; flex-direction: column;">
+                                <div style="display: flex; height: 30px; gap: 5px;">
+                                    <img class="icone-informacoes" src="{% static 'assets/icones/hashtag_branco.png' %}" alt="">
+                                    <p class="subtitulo-medio">Nº de série / Chassi </p>
+                                </div>
+                                <p>
+                                    {% if ativo.chassi %}
+                                        {{ ativo.chassi }}
+                                    {% else %}
+                                        SEM CHASSI
+                                    {% endif %}
+                                </p>
+                            </div>
+                            <div class="sep-detalhes" style="display: flex; flex-direction: column;">
+                                <div style="display: flex; height: 30px; gap: 5px;">
+                                    <img class="icone-informacoes" src="{% static 'assets/icones/hashtag_branco.png' %}" alt="">
+                                    <p class="subtitulo-medio">Placa</p>
+                                </div>
+                                <p>
+                                    {% if ativo.placa %}
+                                        {{ ativo.placa }}
+                                    {% else %}
+                                        SEM PLACA
+                                    {% endif %}
+                                </p>
                             </div>
                         </div>
                     </div>
-                    <div class="informacoes-patrimonio-card" style="min-height: 100px;">
-                        <p class="titulo-pequeno">Descrição</p>
-                        <p class="subtitulo-medio"> Trator Farmall 100 atualmente locado na fazenda Santa Lucia</p>
+                    <div>
+                        <div class="informacoes-patrimonio-card" style="min-height: 100px;">
+                            <p class="titulo-pequeno">Fiscal</p>
+                            <div class="box-valores-ativo">
+                                <div class="valores-ativo aquisicao">
+                                    <p class="subtitulo-medio">Valor de aquisição</p>
+                                    <p class="titulo-medio">R$ {{ ativo.valor|intcomma}}</p>
+                                </div>
+                                <div class="valores-ativo atual">
+                                    <p class="subtitulo-medio">Valor de atual</p>
+                                    <p class="titulo-medio">R$3.200,00</p>
+                                </div>
+                            </div>
+                            <div class="sep-detalhes" style="display: flex; flex-direction: column;">
+                                <div style="display: flex; height: 30px; gap: 5px;">
+                                    <img class="icone-informacoes" src="{% static 'assets/icones/usuario_branco.png' %}" alt="responsável">
+                                    <p class="subtitulo-medio">Fornecedor</p>
+                                </div>
+                                <p>{{ ativo.fornecedor }}</p>
+                            </div>
+                            <div class="sep-detalhes" style="display: flex; flex-direction: column;">
+                                <div style="display: flex; height: 30px; gap: 5px;">
+                                    <img class="icone-informacoes" src="{% static 'assets/icones/hashtag_branco.png' %}" alt="responsável">
+                                    <p class="subtitulo-medio">Nº da nota</p>
+                                </div>
+                                <p>{{ ativo.numero_nota }}</p>
+                            </div>
+                            <div class="sep-detalhes" style="display: flex; flex-direction: column;">
+                                <div style="display: flex; height: 30px; gap: 5px;">
+                                    <img class="icone-informacoes" src="{% static 'assets/icones/hashtag_branco.png' %}" alt="responsável">
+                                    <p class="subtitulo-medio">Nota fiscal</p>
+                                </div>
+                                {% if ativo.nota %}
+                                    <div class="upload-nota-fiscal">
+                                        <a href="{{ ativo.nota.url }}" target="_blank">
+                                            <div class="upload-nota-fiscal">
+                                                <button onclick="visualizarNota()">Vizualizar nota fiscal</button>
+                                            </div>
+                                        </a>
+                                    </div>
+                                {% else %}
+                                    SEM NOTA VINCULADA
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="informacoes-patrimonio-card" style="min-height: 100px;">
+                            <p class="titulo-pequeno">Descrição</p>
+                            <p class="subtitulo-medio"> {{ ativo.descricao }}</p>
+                        </div>
                     </div>
                 </div>
-            </div>
+            {% endif %}
         </main>
     </div>
     

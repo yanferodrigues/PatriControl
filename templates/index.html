@@ -113,7 +113,7 @@
                     <div class="main-principal-index-card-direita-ativos">
                         {% if ativos_ultimos %}
                             {% for ativo in ativos_ultimos %}
-                                <a href="{% url 'descricao-ativo' %}" class="main-principal-index-card-direita-ativos-self">
+                                <a href="{% url 'descricao-ativo' ativo.id %}" class="main-principal-index-card-direita-ativos-self">
                                     <div style="display:flex; gap:30px;">
                                         {% if ativo.categoria == "VEÍCULOS" %}
                                             <div class="icone-cards self-ativo azul">

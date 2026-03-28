@@ -86,7 +86,7 @@
                         </thead>
                         <tbody>
                             {% for ativo in patrimonio %}
-                            <tr onclick="window.location.href='{% url 'descricao-ativo'%}'" style="cursor: pointer;">
+                            <tr onclick="window.location.href='{% url 'descricao-ativo' ativo.id%}'" style="cursor: pointer;">
                                 <td>{{ ativo.localizacao|upper }}</td>
                                 <td>{{ ativo.codigo|upper }}</td>
                                 <td>{{ ativo.auxiliar|upper }}</td>
@@ -113,7 +113,7 @@
                 
                 <div class='opcao-cards ativo'>
                     {% for ativo in patrimonio %}
-                        <a href="{% url 'descricao-ativo' %}" class="main-principal-patrimonio-card">
+                        <a href="{% url 'descricao-ativo' ativo.id %}" class="main-principal-patrimonio-card">
                             <div style='display: flex; justify-content:center; margin-bottom: 10px;'>
                                 {% if ativo.adesivado %}
                                 <p class="subtitulo-pequeno">
