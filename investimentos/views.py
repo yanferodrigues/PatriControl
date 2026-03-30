@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from django.db.models import Sum
 from investimentos.models import Investimentos
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def investimentos(request):
     return render(request, "investimentos.html")
 

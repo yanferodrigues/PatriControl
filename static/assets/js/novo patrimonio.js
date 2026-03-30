@@ -22,13 +22,11 @@ input.addEventListener("change", function(){
 })
 
 /* NOTA FISCAL */
-/* NOTA FISCAL */
 const campoNota = document.getElementById("input-nota-ativo");
 const inputNota = document.getElementById("input-nota");
 
 let arquivoAtual = null;
 
-// Função reutilizável para aplicar a lógica ao input
 function configurarInput(input) {
     input.addEventListener("change", function() {
         const arquivo = this.files[0];
@@ -53,10 +51,8 @@ function configurarInput(input) {
     });
 }
 
-// Inicializa o primeiro input
 configurarInput(inputNota);
 
-// Botão visualizar
 function visualizarNota() {
     if (arquivoAtual) {
         const url = URL.createObjectURL(arquivoAtual);
@@ -66,23 +62,19 @@ function visualizarNota() {
     }
 }
 
-// Botão excluir
 function excluirNota() {
-    arquivoAtual = null; // Reseta a variável global
-    campoNota.innerHTML = ''; // Limpa o container
+    arquivoAtual = null; 
+    campoNota.innerHTML = ''; 
     
-    // Recria o input
     const inputAddNota = document.createElement("input");
     inputAddNota.id = "input-nota";
     inputAddNota.type = "file";
     inputAddNota.accept = "application/pdf";
-    // Opcional: oculte o input se você usa a imagem como gatilho (label)
     
     const imgAddNota = document.createElement("img");
     imgAddNota.src = "assets/icones/adicionar imagem.png";
     imgAddNota.style.cursor = "pointer";
 
-    // MUITO IMPORTANTE: Reatribuir o evento ao novo elemento
     configurarInput(inputAddNota);
 
     campoNota.appendChild(inputAddNota);

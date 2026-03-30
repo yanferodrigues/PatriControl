@@ -1,9 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from investimentos.models import Investimentos
 from ativos.models import Ativos
 from django.db.models import Sum
 from django.http import JsonResponse
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def dashboard(request):
     ativos = Ativos.objects.all()
     investimentos = Investimentos.objects.all()

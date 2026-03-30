@@ -1,7 +1,9 @@
 from django.shortcuts import render, get_object_or_404
 from ativos.models import Ativos
 from django.db.models import Sum
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def novo_ativo(request):
     return render(request, "novo patrimonio.html")
 

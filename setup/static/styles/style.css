@@ -118,7 +118,6 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    margin: 10px;
     gap: 10px;
 }
 
@@ -1078,6 +1077,10 @@ main {
     font-size: medium; 
 }
 #btn-logout {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     border: 1px solid var(--vermelho);
     background-color: var(--vermelho-escuro);
     color: var(--fonte-primaria);
@@ -1114,6 +1117,86 @@ main {
     width: 100%;
     height: 100%;
 }
+
+/* LOGIN */
+
+.fundo-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    position: relative;
+}
+
+.fundo-login::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('/static/assets/auxiliar/trator-fundo.jpg') no-repeat center center;
+    background-size: cover;
+    filter: blur(8px) brightness(0.3);
+    transform: scale(1.1);
+    z-index: -1;
+}
+
+.box-login {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(255, 255, 255);
+    border-radius: 15px;
+    height: 700px;
+    width: 600px;
+    box-shadow: var(--sombra);
+    color: #353535;
+}
+.titulo-login{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+.titulo-login img {
+    height: 80px;
+    width: 160px;
+}
+.inputs-login {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    height: 400px;
+}
+.inputs-login input, .inputs-login select {
+    width: 70%;
+    border-radius: 10px;
+    height: 30px;
+    padding: 20px;
+    border: 1px solid #353535;
+    margin-bottom: 40px;
+    color: black;
+}
+#botao-entrar-login {
+    width:30%;
+    height: 30px;
+    border-radius: 10px;
+    border: 1px solid var(--azul-escuro);
+    background-color: #353535;
+    color: white;
+    transition: transform 0.2s ease;
+    cursor: pointer;
+}
+#botao-entrar-login:hover {
+    transform: scale(1.1);
+    background-color: #272727;
+}
+
 
 
 /* KEYFRAMES */

@@ -1,0 +1,40 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login PatriControl</title>
+    <link rel="stylesheet" href="{% static 'styles/style.css' %}">
+    <link rel="icon" href="{% static 'assets/auxiliar/Logo patricontrol' %}">
+</head>
+<body>
+    <div class="fundo-login">
+        <div class="box-login aparecer-baixo">
+            <div class="titulo-login">
+                <img src="{% static 'assets\auxiliar\logo patricontrol.png' %}" alt="">
+                <div style="display:flex; flex-direction:column;align-items: center;">
+                    <p style="color:#353535; font-size:xx-large; font-weight:900">PATRICONTROL</p>
+                    <p class="subtitulo-pequeno">Gestão e controle patrimonial</p>
+                </div>
+            </div>
+            <form method="POST" action="{% url 'login' %}" class="inputs-login">
+                {% csrf_token %}
+                <p>
+                    {% if messages %}
+                        {% for message in messages %}
+                            {{message}}
+                        {% endfor %}
+                    {% endif %}
+                </p>
+                <label for="email-login">Email:</label>
+                <input id="email-login" type="email" name="email" required>
+                <label for="senha-login">Senha:</label>
+                <input id="senha-login" type="password" name="senha" required>
+                <button id="botao-entrar-login" type="submit"> ENTRAR </button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
