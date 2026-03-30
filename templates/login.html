@@ -21,17 +21,21 @@
             </div>
             <form method="POST" action="{% url 'login' %}" class="inputs-login">
                 {% csrf_token %}
-                <p>
+                <label for="email-login">Email:</label>
+                {% if email %}
+                    <input id="email-login" type="email" name="email" required value={{email}}>
+                {% else %}
+                    <input id="email-login" type="email" name="email" required>
+                {% endif %}
+                <label for="senha-login">Senha:</label>
+                <input id="senha-login" type="password" name="senha" required>
+                <p style="color: red; margin-bottom:30px;">
                     {% if messages %}
                         {% for message in messages %}
                             {{message}}
                         {% endfor %}
                     {% endif %}
                 </p>
-                <label for="email-login">Email:</label>
-                <input id="email-login" type="email" name="email" required>
-                <label for="senha-login">Senha:</label>
-                <input id="senha-login" type="password" name="senha" required>
                 <button id="botao-entrar-login" type="submit"> ENTRAR </button>
             </form>
         </div>
