@@ -68,14 +68,24 @@
                                     <img class="icone-informacoes" src="{% static 'assets/icones/usuario_branco.png' %}" alt="responsável">
                                     <p class="subtitulo-medio">Responsável</p>
                                 </div>
-                                <p>{{ ativo.responsavel }}</p>
+                                <p>{% if ativo.responsavel %}
+                                        {{ ativo.responsavel }}
+                                    {% else %}
+                                        NÃO DEFINIDO
+                                    {% endif %}</p>
                             </div>
                             <div class="sep-detalhes" style="display: flex; flex-direction: column;">
                                 <div style="display: flex; height: 30px; gap: 5px;">
                                     <img class="icone-informacoes" src="{% static 'assets/icones/calendario_branco.png' %}" alt="calendario">
                                     <p class="subtitulo-medio">Data de aquisição</p>
                                 </div>
-                                <p>{{ ativo.incorporacao }}</p>
+                                <p>
+                                    {% if ativo.incorporacao %}
+                                        {{ ativo.incorporacao }}
+                                    {% else %}
+                                        NÃO INFORMADO
+                                    {% endif %}
+                                </p>
                             </div>
                             <div class="sep-detalhes" style="display: flex; flex-direction: column;">
                                 <div style="display: flex; height: 30px; gap: 5px;">

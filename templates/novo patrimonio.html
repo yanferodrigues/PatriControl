@@ -25,7 +25,8 @@
             </nav>
         </aside>
         <main class="aparecer-baixo">
-            <form action="POST">
+            <form action="{% url 'novo-ativo'%}" method="POST">
+                {% csrf_token %}
                 <div id="card-upload-foto">
                     <label class="upload-box">
                         <input type="file" accept="image/*" id="inputFoto">
@@ -65,8 +66,8 @@
                         <div>
                             <label class="label-inputs" for="input-adesivado-ativo">Adesivado *</label>
                             <select class="input-grande" name="input-adesivado-ativo" id="input-adesivado-ativo" type="text" required>
-                                <option value="NAO ADESIVADO" selected>Não adesivado</option>
-                                <option value="ADESIVADO">Adesivado</option>
+                                <option value="0" selected>Não adesivado</option>
+                                <option value="1">Adesivado</option>
                             </select>
                         </div>
                         <div>
@@ -95,8 +96,8 @@
                         <div>
                             <label class="label-inputs" for="select-status-ativo">Status *</label>
                             <select class="input-grande" name="select-status-ativo" id="select-status-ativo" required>
-                                <option value="ATIVO" selected>Ativo</option>
-                                <option value="INATIVO">Inativo</option>
+                                <option value="1" selected>Ativo</option>
+                                <option value="0">Inativo</option>
                             </select>
                         </div>
                     </div>
@@ -137,11 +138,11 @@
                         </div>
                         <div>
                             <label class="label-inputs" for="input-responsavel-ativo">Fornecedor</label>
-                            <input class="input-grande" name="input-responsavel-ativo" id="input-responsavel-ativo" type="text" placeholder="Ex: Bombas Tigre Ltda">
+                            <input class="input-grande" name="input-fornecedor-ativo" id="input-responsavel-ativo" type="text" placeholder="Ex: Bombas Tigre Ltda">
                         </div>
                         <div>
                             <label class="label-inputs" for="input-responsavel-ativo">Nº da NF</label>
-                            <input class="input-grande" name="input-responsavel-ativo" id="input-responsavel-ativo" type="text" placeholder="Ex: 026">
+                            <input class="input-grande" name="input-numero-nf-ativo" id="input-responsavel-ativo" type="text" placeholder="Ex: 026">
                         </div>
                     </div>
                     <div class="box-inputs">
@@ -153,16 +154,16 @@
                             <label class="label-inputs" for="input-nota-ativo">Nota Fiscal</label>
                             <label class="campo-upload-nota" name="input-nota-ativo" id="input-nota-ativo">
                                 <img src="{% static 'assets/icones/adicionar imagem.png' %}" alt="add file">
-                                <input id="input-nota" type="file" accept="application/pdf">
+                                <input name="input-nota-fiscal-ativo" id="input-nota" type="file" accept="application/pdf">
                             </label>
-                            <button onclick="visualizarNota()">Vizualizar nota fiscal</button>
-                            <button onclick="excluirNota()">Excluir nota fiscal</button>
+                            <button type="button" onclick="visualizarNota()">Vizualizar nota fiscal</button>
+                            <button type="button" onclick="excluirNota()">Excluir nota fiscal</button>
                         </div>
                     </div>
                 </div>
                 <div style="display:flex; justify-content: center; align-items: center; gap:15px;">
                     <button type="submit" class="botao-editar"> Salvar </button>
-                    <button type="submit" class="botao-excluir"> Cancelar </button>
+                    <a href="{% url 'ativos' %}" class="botao-excluir"> Cancelar </a>
                 </div>
                 
             </form>

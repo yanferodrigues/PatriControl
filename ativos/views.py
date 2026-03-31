@@ -1,10 +1,54 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from ativos.models import Ativos
 from django.db.models import Sum
 from django.contrib.auth.decorators import login_required
 
 @login_required
 def novo_ativo(request):
+    if request.method == "POST":
+        codigo = request.POST.get("input-codigo-ativo")
+        descricao = request.POST.get("input-descricao-ativo")
+        chassi = request.POST.get("input-chassi-ativo")
+        placa = request.POST.get("input-placa-ativo")
+        adesivado = request.POST.get("input-adesivado-ativo") == '1'
+        codigo_auxiliar = request.POST.get("input-auxiliar-ativo")
+        cor = request.POST.get("input-cor-ativo")
+        categoria = request.POST.get("select-categoria-ativo")
+        status = request.POST.get("select-status-ativo") == '1'
+        detalhamento = request.POST.get("textarea-detalhamento-ativo")
+        localizacao = request.POST.get("input-localizacao-ativo")
+        responsavel = request.POST.get("input-responsavel-ativo")
+        data_incorporacao = request.POST.get("input-data-ativo")
+        fornecedor = request.POST.get("input-fornecedor-ativo")
+        numero_nf = request.POST.get("input-numero-nf-ativo")
+        valor = request.POST.get("input-valor-ativo")
+        foto = request.FILES.get("inputFoto")
+        nota_fiscal = request.FILES.get("input-nota-fiscal-ativo")
+        
+        Ativos.objects.create(
+            foto=foto,
+            codigo=codigo,
+            descricao=descricao,
+            chassi=chassi,
+            placa=placa,
+            adesivado=adesivado,
+            auxiliar=codigo_auxiliar,
+            cor=cor,
+            categoria=categoria,
+            ativo=status,
+            detalhamento=detalhamento,
+            localizacao=localizacao,
+            responsavel=responsavel,
+            incorporacao=data_incorporacao,
+            fornecedor=fornecedor,
+            numero_nota=numero_nf,
+            valor=valor,
+            nota=nota_fiscal
+        )
+        
+        return redirect("ativos")
+            
+        
     return render(request, "novo patrimonio.html")
 
 def ativos(request):
