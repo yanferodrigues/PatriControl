@@ -22,15 +22,33 @@ def dashboard(request):
     })
 
 def grafico(request):
-    quantidade_veiculos = int(len(Ativos.objects.filter(categoria = "VEÍCULOS")))
-    quantidade_maquinas = int(len(Ativos.objects.filter(categoria = "MÁQUINAS E IMPLEMENTOS")))
-    quantidade_informatica = int(len(Ativos.objects.filter(categoria = "INFORMÁTICA E COMUNICAÇÃO")))
-    quantidade_equipamentos = int(len(Ativos.objects.filter(categoria = "EQUIPAMENTOS DIVERSOS")))
-    quantidade_moveis = int(len(Ativos.objects.filter(categoria = "MÓVEIS E UTENSÍLIOS")))
-    quantidade_imoveis = int(len(Investimentos.objects.all()))
 
-    data = {
-        "valores": [quantidade_veiculos, quantidade_equipamentos,quantidade_maquinas,quantidade_informatica,quantidade_moveis,quantidade_imoveis]
-    }
+    categorias = [
+        "VEÍCULOS",
+        "EQUIPAMENTOS DIVERSOS",
+        "MÁQUINAS E IMPLEMENTOS",
+        "INFORMÁTICA E COMUNICAÇÃO",
+        "MÓVEIS E UTENSÍLIOS",
+        "EQUIPAMENTOS OFICINA",
+        "EQUIPAMENTOS UBG",
+        "EQUIPAMENTOS UBA",
+        "AERONAVES"
+    ]
 
-    return JsonResponse(data)
+    labels = []
+    valores = []
+
+    for categoria in categorias:
+        quantidade = Ativos.objects.filter(categoria=categoria).count()
+
+        labels.append(categoria.capitalize())  # deixa bonito no gráfico
+        valores.append(quantidade)
+
+    # imóveis separado
+    labels.append("Imóveis")
+    valores.append(Investimentos.objects.count())
+
+    return JsonResponse({
+        "labels": labels,
+        "valores": valores
+    })

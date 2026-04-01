@@ -4,14 +4,7 @@ const chart = new Chart(graficoDB, {
     type: 'doughnut',
 
     data: {
-        labels: [
-            'Veiculos',
-            'Equipamentos diversos',
-            'Maquinas',
-            'Informatica e comunicação',
-            'Móveis e utensílios',
-            'Imóveis'
-        ],
+        labels: [], // 🔥 agora vem do backend
 
         datasets: [{
             label: 'Quantidade',
@@ -23,7 +16,11 @@ const chart = new Chart(graficoDB, {
                 '#e12a2a',
                 '#fee924',
                 '#b342ff',
-                '#84f2cb'
+                '#84f2cb',
+                '#ff8c42',
+                '#00c2ff',
+                '#ff66b2',
+                '#a3ff12'
             ],
 
             borderColor: [
@@ -32,7 +29,11 @@ const chart = new Chart(graficoDB, {
                 '#562c2c',
                 '#4e4421',
                 '#3f2a4c',
-                '#1f2f47'
+                '#1f2f47',
+                '#5a2e1f',
+                '#003f5c',
+                '#4c1f3a',
+                '#3a4c1f'
             ],
 
             borderWidth: 2,
@@ -78,17 +79,17 @@ const chart = new Chart(graficoDB, {
 
 // 🔥 FUNÇÃO QUE BUSCA DO DJANGO
 function carregarGrafico() {
-    fetch('api/grafico/')  // rota do Django
+    fetch('api/grafico/')
         .then(response => response.json())
         .then(data => {
 
-            console.log("Dados do Django:", data); // debug
+            console.log("Dados do Django:", data);
 
-            // 🔥 AQUI A MÁGICA ACONTECE
+            // 🔥 AGORA VEM TUDO DINÂMICO
+            chart.data.labels = data.labels;
             chart.data.datasets[0].data = data.valores;
 
             chart.update();
-
         })
         .catch(error => console.error("Erro ao carregar gráfico:", error));
 }

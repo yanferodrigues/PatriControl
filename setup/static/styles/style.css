@@ -1026,7 +1026,8 @@ main {
     align-items: center;
     height: 100px;
     gap: 10px;
-    width: 200px;
+    width: 90%;
+    max-width: 400px;
     border-radius: var(--arredondamento);
 }
 .valores-ativo.aquisicao {

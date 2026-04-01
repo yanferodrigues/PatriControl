@@ -29,7 +29,13 @@
             <div class="main-topo">
                 <div>
                     <p class="titulo-grande">Investimentos</p>
-                    <p class="subtitulo-medio">100 Investimentos encontrados</p>
+                    <p class="subtitulo-medio">
+                        {% if investimentos %}
+                        {{investimentos|length}} item em patrimônio encontrado
+                        {% else %}
+                        Nenhum ativo encontrado
+                        {% endif %}
+                    </p>
                 </div>
                 
                 <button class="botao-azul">
@@ -83,6 +89,12 @@
                                     {{investimento.codigo|upper}}
                                 </div>
                                 <div class="main-principal-patrimonio-card-descricao">
+                                    <div class="main-principal-patrimonio-card-descricao-titulo">
+                                        <div>
+                                            <p class="titulo-pequeno card-titulo">{{investimento.descricao|upper}}</p>
+                                            <p class="subtitulo-medio">{{ investimento.codigo|upper}}</p>
+                                        </div>
+                                    </div>
                                     <div class="main-principal-patrimonio-card-descricao-meio">
                                         <div>
                                             <img src="{% static 'assets/icones/localizacao_branco.png' %}" alt="localização">
@@ -98,6 +110,7 @@
                                             </p>
                                         </div>
                                     </div>
+                                    
                                     <div class="card-valores">
                                         <p class="titulo-azul">
                                             {% if investimento.valor %}

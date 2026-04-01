@@ -7,6 +7,10 @@ class Ativos(models.Model):
         ('VEÍCULOS', 'Veículos'),
         ('EQUIPAMENTOS DIVERSOS', 'Equipamentos diversos'),
         ('MÓVEIS E UTENSÍLIOS', 'Móveis e utensílios'),
+        ('EQUIPAMENTOS OFICINA', 'Equipamentos oficina'),
+        ('EQUIPAMENTOS UBG', 'Equipamentos UBG'),
+        ('EQUIPAMENTOS UBA', 'Equipamentos UBA'),
+        ('AERONAVES', 'Aeronaves')
     ]
     FILIAIS_CHOICES = [
         ('SANTA LUCIA', 'Santa Lúcia'),
