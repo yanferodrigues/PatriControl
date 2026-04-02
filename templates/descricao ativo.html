@@ -29,8 +29,20 @@
             {% if ativo %}
                 <div class="main-topo">
                     <div>
-                        <p class="titulo-grande">{{ ativo.codigo|upper}}</p>
-                        <p class="subtitulo-medio">{{ ativo.descricao|upper }}</p>
+                        <p class="titulo-grande">
+                            {% if ativo.codigo and not ativo.codigo == 'nan'%}
+                                {{ ativo.codigo|upper }}
+                            {% else %}
+                                {{ '' }}
+                            {% endif %}
+                        </p>
+                        <p class="subtitulo-medio">
+                            {% if ativo.descricao and not ativo.descricao == 'nan'%}
+                                {{ ativo.descricao }}
+                            {% else %}
+                                {{ '' }}
+                            {% endif %}
+                        </p>
                     </div>
                     
                     <div style="display: flex; gap: 10px;">
@@ -54,14 +66,26 @@
                                     <img class="icone-informacoes" src="{% static 'assets/icones/etiqueta_branco.png' %}" alt="etiqueta">
                                     <p class="subtitulo-medio">Categoria</p>
                                 </div>
-                                <p> {{ ativo.categoria|upper }}</p>
+                                <p> 
+                                    {% if ativo.categoria and not ativo.categoria == 'nan'%}
+                                        {{ ativo.categoria }}
+                                    {% else %}
+                                        NÃO INFORMADO
+                                    {% endif %}
+                                </p>
                             </div>
                             <div class="sep-detalhes" style="display: flex; flex-direction: column;">
                                 <div style="display: flex; height: 30px; gap: 5px;">
                                     <img class="icone-informacoes" src="{% static 'assets/icones/localizacao_branco.png' %}" alt="localização">
                                     <p class="subtitulo-medio">Localização</p>
                                 </div>
-                                <p>{{ ativo.localizacao }}</p>
+                                <p>
+                                    {% if ativo.localizacao and not ativo.localizacao == 'nan'%}
+                                        {{ ativo.localizacao }}
+                                    {% else %}
+                                        NÃO INFORMADO
+                                    {% endif %}
+                                </p>
                             </div>
                             <div class="sep-detalhes" style="display: flex; flex-direction: column;">
                                 <div style="display: flex; height: 30px; gap: 5px;">
@@ -121,7 +145,13 @@
                             <div class="box-valores-ativo">
                                 <div class="valores-ativo aquisicao">
                                     <p class="subtitulo-medio">Valor de aquisição</p>
-                                    <p class="titulo-medio">R$ {{ ativo.valor|intcomma}}</p>
+                                    <p class="titulo-medio">
+                                        {% if ativo.valor and not ativo.valor == 'nan'%}
+                                            R$ {{ ativo.valor|intcomma}}
+                                        {% else %}
+                                            NÃO INFORMADO
+                                        {% endif %}
+                                    </p>
                                 </div>
                                 <div class="valores-ativo atual">
                                     <p class="subtitulo-medio">Valor de atual</p>
@@ -133,14 +163,26 @@
                                     <img class="icone-informacoes" src="{% static 'assets/icones/usuario_branco.png' %}" alt="responsável">
                                     <p class="subtitulo-medio">Fornecedor</p>
                                 </div>
-                                <p>{{ ativo.fornecedor }}</p>
+                                <p>
+                                    {% if ativo.fornecedor and not ativo.fornecedor == 'nan'%}
+                                        {{ ativo.fornecedor }}
+                                    {% else %}
+                                        NÃO INFORMADO
+                                    {% endif %}
+                                </p>
                             </div>
                             <div class="sep-detalhes" style="display: flex; flex-direction: column;">
                                 <div style="display: flex; height: 30px; gap: 5px;">
                                     <img class="icone-informacoes" src="{% static 'assets/icones/hashtag_branco.png' %}" alt="responsável">
                                     <p class="subtitulo-medio">Nº da nota</p>
                                 </div>
-                                <p>{{ ativo.numero_nota }}</p>
+                                <p>
+                                    {% if ativo.numero_nota and not ativo.numero_nota == 'nan'%}
+                                        {{ ativo.numero_nota }}
+                                    {% else %}
+                                        NÃO INFORMADO
+                                    {% endif %}
+                                </p>
                             </div>
                             <div class="sep-detalhes" style="display: flex; flex-direction: column;">
                                 <div style="display: flex; height: 30px; gap: 5px;">
@@ -162,7 +204,13 @@
                         </div>
                         <div class="informacoes-patrimonio-card" style="min-height: 100px;">
                             <p class="titulo-pequeno">Descrição</p>
-                            <p class="subtitulo-medio"> {{ ativo.detalhamento }}</p>
+                            <p class="subtitulo-medio">
+                                {% if ativo.detalhamento and not ativo.detalhamento == 'nan'%}
+                                    {{ ativo.detalhamento }}
+                                {% else %}
+                                    SEM DETALHAMENTO
+                                {% endif %}</p>
+                            </p>
                         </div>
                     </div>
                 </div>

@@ -670,6 +670,12 @@ main {
     background-color: transparent;
     border-top-left-radius: var(--arredondamento);
     border-bottom-left-radius: var(--arredondamento);
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+.main-pesquisa img:hover{
+    transform: scale(1.2);
+    box-shadow: var(--sombra);
 }
 .main-pesquisa-patrimonio {
     display: flex;

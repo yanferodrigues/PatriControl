@@ -25,63 +25,69 @@
             </nav>
         </aside>
         <main class="aparecer-baixo">
-        
-            <div class="informacoes-patrimonio-card">
-                <p class="titulo-medio">Informações Básicas</p>
-                <div class="box-inputs">
-                    <div>
-                        <label class="label-inputs" for="input-codigo-ativo">Código *</label>
-                        <input class="input-grande" name="input-codigo-ativo" id="input-codigo-ativo" type="text" placeholder="Ex: INV-123" required>
+            <form action="{% url 'novo-investimento' %}" method="POST">
+                {% csrf_token %}
+                <div class="informacoes-patrimonio-card">
+                    <p class="titulo-medio">Informações Básicas</p>
+                    <div class="box-inputs">
+                        <div>
+                            <label class="label-inputs" for="input-codigo-investimento">Código *</label>
+                            <input class="input-grande" name="input-codigo-investimento" id="input-codigo-investimento" type="text" placeholder="Ex: INV-123" required>
+                        </div>
+                        <div>
+                            <label class="label-inputs" for="input-descricao-investimento">Descrição *</label>
+                            <input class="input-grande" name="input-descricao-investimento" id="input-descricao-investimento" type="text" placeholder="Ex: Poços artesianos" required>
+                        </div>
+                        <div>
+                            <label class="label-inputs" for="select-status-investimento">Status *</label>
+                            <select class="input-grande" name="select-status-investimento" id="select-status-investimento" required>
+                                <option value="1" selected>Ativo</option>
+                                <option value="0">Inativo</option>
+                            </select>
+                        </div>
                     </div>
-                    <div>
-                        <label class="label-inputs" for="input-descricao-ativo">Descrição *</label>
-                        <input class="input-grande" name="input-descricao-ativo" id="input-descricao-ativo" type="text" placeholder="Ex: Poços artesianos" required>
-                    </div>
-                    <div>
-                        <label class="label-inputs" for="select-status-ativo">Status *</label>
-                        <select class="input-grande" name="select-status-ativo" id="select-status-ativo" required>
-                            <option value="ATIVO" selected>Ativo</option>
-                            <option value="INATIVO">Inativo</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="box-inputs">
-                    <div>
-                        <label class="label-inputs" for="textarea-detalhamento-ativo">Detalhamento</label>
-                        <textarea class="textarea-grande" name="textarea-detalhamento-ativo" id="textarea-detalhamento-ativo" placeholder="Informações extras..."></textarea>
-                    </div>
-                </div>
-            </div>
-            <div class="informacoes-patrimonio-card">
-                <p class="titulo-medio">Localização/Data de icorporação</p>
-                <div class="box-inputs">
-                    <div>
-                        <label class="label-inputs" for="input-localizacao-ativo">Localização *</label>
-                        <select class="input-grande" name="input-localizacao-ativo" id="input-localizacao-ativo" type="text" required>
-                            <option selected hidden></option>
-                            <option value="SANTA LUCIA">Santa Lúcia</option>
-                            <option value="GRANDE LESTE">Grande Leste</option>
-                            <option value="SANTO EXPEDITO">Santo Expedito</option>
-                            <option value="JATOBA">Jatobá</option>
-                            <option value="ESCRITORIO CENTRAL">Escritório Central</option>
-                            <option value="UBA">UBA</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="label-inputs" for="input-responsavel-ativo">Data inicial</label>
-                        <input class="input-grande" name="input-responsavel-ativo" id="input-responsavel-ativo" type="date" placeholder="">
+                    <div class="box-inputs">
+                        <div>
+                            <label class="label-inputs" for="textarea-detalhamento-investimento">Detalhamento</label>
+                            <textarea class="textarea-grande" name="textarea-detalhamento-investimento" id="textarea-detalhamento-investimento" placeholder="Informações extras..."></textarea>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="informacoes-patrimonio-card">
-                <p class="titulo-medio">Informações Financeiras</p>
-                <div class="box-inputs">
-                    <div>
-                        <label class="label-inputs" for="input-valor-ativo">Valor atual *</label>
-                        <input class="input-grande" name="input-valor-ativo" id="input-valor-ativo" type="number" placeholder="R$">
+                <div class="informacoes-patrimonio-card">
+                    <p class="titulo-medio">Localização/Data de icorporação</p>
+                    <div class="box-inputs">
+                        <div>
+                            <label class="label-inputs" for="input-localizacao-investimento">Localização *</label>
+                            <select class="input-grande" name="input-localizacao-investimento" id="input-localizacao-investimento" type="text" required>
+                                <option selected hidden></option>
+                                <option value="SANTA LUCIA">Santa Lúcia</option>
+                                <option value="GRANDE LESTE">Grande Leste</option>
+                                <option value="SANTO EXPEDITO">Santo Expedito</option>
+                                <option value="JATOBA">Jatobá</option>
+                                <option value="ESCRITORIO CENTRAL">Escritório Central</option>
+                                <option value="UBA">UBA</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="label-inputs" for="input-data-investimento">Data inicial</label>
+                            <input class="input-grande" name="input-data-investimento" id="input-data-investimento" type="date" placeholder="">
+                        </div>
                     </div>
                 </div>
-            </div>
+                <div class="informacoes-patrimonio-card">
+                    <p class="titulo-medio">Informações Financeiras</p>
+                    <div class="box-inputs">
+                        <div>
+                            <label class="label-inputs" for="input-valor-investimento">Valor atual *</label>
+                            <input class="input-grande" name="input-valor-investimento" id="input-valor-investimento" type="number" placeholder="R$">
+                        </div>
+                    </div>
+                </div>
+                <div style="display:flex; justify-content: center; align-items: center; gap:15px;">
+                    <button type="submit" class="botao-editar"> Salvar </button>
+                    <a href="{% url 'ativos' %}" class="botao-excluir"> Cancelar </a>
+                </div>
+            </form>
         </main>
     </div>
     

@@ -52,7 +52,7 @@ def novo_ativo(request):
     return render(request, "novo patrimonio.html")
 
 def ativos(request):
-    patrimonio = Ativos.objects.all()
+    patrimonio = Ativos.objects.all().order_by("codigo")
     valor_total = patrimonio.aggregate(total = Sum('valor'))['total']
 
     return render(request, "ativos.html", {
@@ -64,4 +64,30 @@ def descricao_ativo(request,ativo_id):
     ativo = get_object_or_404(Ativos, id=ativo_id)
     return render(request, "descricao ativo.html", {
         "ativo":ativo,
+    })
+    
+def buscar_ativo(request):
+    ativos = Ativos.objects.order_by("codigo")
+    
+    if "buscar" in request.GET:
+        busca_ativo = request.GET['buscar']
+        
+        ativos = ativos.filter(codigo__icontains= busca_ativo)
+    if "categoria" in request.GET:
+        categoria_ativo = request.GET['categoria']
+        
+        if categoria_ativo != 'TODOS':
+            ativos = ativos.filter(categoria = categoria_ativo)
+        else:
+            pass
+    if "status" in request.GET:
+        status = request.GET['status']
+        
+        if status == "1" | status == "0":
+            ativos = ativos.filter(ativo = status == '1')
+        else:
+            pass
+    
+    return render(request, "buscar_ativo.html", {
+        "patrimonio": ativos,
     })
