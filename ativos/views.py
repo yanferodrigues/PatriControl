@@ -90,7 +90,11 @@ def buscar_ativo(request):
     if "filial" in request.GET:
         filial = request.GET['filial']
 
-        ativos = ativos.filter(localizacao = filial)
+        if filial != 'TODOS':
+            ativos = ativos.filter(localizacao = filial)
+        else:
+            pass
+        
 
     
     return render(request, "buscar_ativo.html", {

@@ -6,10 +6,6 @@ function abrirMenu(btn) {
     aside.classList.toggle("ativo")
 }
 
-function alterarTema() {
-    document.body.classList.toggle("light-mode")
-}
-
 function irPara(pagina) {
     window.location.href = `${pagina}`;
 }

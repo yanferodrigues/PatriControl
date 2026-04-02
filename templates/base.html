@@ -26,7 +26,11 @@
             </a>
             <a href="{% url 'usuario'%}" class="conta-aside">  
                 <div class="conta-aside-conteudo">
-                    <img class="imagem-conta" src="{% static 'assets/auxiliar/foto yan corporativa.jpeg' %}" alt="">
+                    {% if usuario %}
+                        <img class="imagem-conta" src="{{usuario.foto.url}}" alt="">
+                    {% else %}
+                        <img class="imagem-conta" src="assets/auxiliar/usuario-notfound.jpg" alt="">
+                    {% endif %}
                     <div>
                         <p class="titulo-pequeno">Yan Felipe Rodrigues</p>
                         <p class="subtitulo-pequeno">Assistente patrimonial</p>
