@@ -1,10 +1,20 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager,User
+from user.models import Usuario
 from django.contrib import messages
 
 def user(request):
-    return render(request,"user.html")
+    if request.user.is_authenticated:
+        user = request.user
+        usuario = Usuario.objects.get(user = user)
+        nome_usuario = usuario.user.username.split(".")
+        nome_usuario_formatado = f"{nome_usuario[0]} {nome_usuario[1]}".title()
+
+    return render(request,"user.html", {
+        "usuario":usuario,
+        "nome_usuario":nome_usuario_formatado
+    })
 
 def login_view(request):
     if request.user.is_authenticated:
@@ -35,3 +45,4 @@ def login_view(request):
 def logout_view(request):
     auth_logout(request)
     return redirect("login")
+

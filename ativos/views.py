@@ -72,7 +72,7 @@ def buscar_ativo(request):
     if "buscar" in request.GET:
         busca_ativo = request.GET['buscar']
         
-        ativos = ativos.filter(codigo__icontains= busca_ativo)
+        ativos = ativos.filter(codigo__icontains= busca_ativo) or ativos.filter(descricao__icontains= busca_ativo)
     if "categoria" in request.GET:
         categoria_ativo = request.GET['categoria']
         
@@ -87,6 +87,11 @@ def buscar_ativo(request):
             ativos = ativos.filter(ativo = status == '1')
         else:
             pass
+    if "filial" in request.GET:
+        filial = request.GET['filial']
+
+        ativos = ativos.filter(localizacao = filial)
+
     
     return render(request, "buscar_ativo.html", {
         "patrimonio": ativos,

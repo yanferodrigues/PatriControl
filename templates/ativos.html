@@ -48,6 +48,15 @@
                     <img src="{% static 'assets/icones/lupa_branca.png' %}" alt="">
                     <input class="main-pesquisa-patrimonio-input" placeholder="Digite o código ou descrição do patrimônio" type="text" name="buscar">
                 </div>
+                
+                <select class="main-pesquisa-patrimonio-select-categoria" name="filial" id="">
+                    <option selected hidden>Todos</option>
+                    <option value="FAZ SANTA LUCIA">Santa Lúcia</option>
+                    <option value="FAZ GRANDE LESTE">Grande Leste</option>
+                    <option value="FAZ SANTO EXPEDITO">Santo Expedito</option>
+                    <option value="FAZ JATOBA">Jatobá</option>
+                    <option value="FAZ ESCRITORIO CENTRAL">Escritório Central</option>
+                </select>
                 <select class="main-pesquisa-patrimonio-select-categoria" name="categoria" id="">
                     <option disabled hidden selected value='TODOS'>Todos</option>
                     <option value="MÁQUINAS E IMPLEMENTOS">Maquinas e implementos</option>
