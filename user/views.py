@@ -5,15 +5,21 @@ from user.models import Usuario
 from django.contrib import messages
 
 def user(request):
-    if request.user.is_authenticated:
-        user = request.user
-        usuario = Usuario.objects.get(user = user)
-        nome_usuario = usuario.user.username.split(".")
-        nome_usuario_formatado = f"{nome_usuario[0]} {nome_usuario[1]}".title()
+    nome_usuario_formatado = "" 
 
-    return render(request,"user.html", {
-        "usuario":usuario,
-        "nome_usuario":nome_usuario_formatado
+    if request.user.is_authenticated:
+        usuario = Usuario.objects.filter(user=request.user).first()
+
+        if usuario:
+            partes = usuario.user.username.split(".")
+
+            if len(partes) >= 2:
+                nome_usuario_formatado = f"{partes[0]} {partes[1]}".title()
+            else:
+                nome_usuario_formatado = partes[0].title()
+
+    return render(request, "user.html", {
+        "nome": nome_usuario_formatado
     })
 
 def login_view(request):
@@ -21,14 +27,14 @@ def login_view(request):
         return redirect("index")
     
     if request.method == "POST":
-        email = request.POST.get("email")
+        usuario = request.POST.get("email")
         senha = request.POST.get("senha")
 
-        if not email or not senha:
+        if not usuario or not senha:
             messages.error(request, "Preencha todos os campos")
             return redirect("login")
 
-        user = authenticate(request, username=email, password=senha)
+        user = authenticate(request, username=usuario, password=senha)
 
         if user is not None:
             auth_login(request, user)
@@ -36,7 +42,7 @@ def login_view(request):
         else:
             messages.error(request, "Usuário ou senha incorretos")
             return render(request,"login.html", {
-                "email": email,
+                "usuario_input": usuario,
             })
 
     return render(request, "login.html")

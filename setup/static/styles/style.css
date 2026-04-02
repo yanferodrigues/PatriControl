@@ -387,6 +387,7 @@ input,select {
     height: 50px;
     width: 50px;
     border-radius: 50px;
+    border: 2px solid var(--cinza);
 }
 
 .conta-aside-conteudo:hover {
@@ -1070,6 +1071,7 @@ main {
     height: 200px;
     width:200px;
     border-radius: 100%;
+    border: 4px solid var(--cinza);
 }
 .inputs-usuario {
     background-color: #2d3037;

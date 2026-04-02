@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login PatriControl</title>
     <link rel="stylesheet" href="{% static 'styles/style.css' %}">
-    <link rel="icon" href="{% static 'assets/auxiliar/Logo patricontrol' %}">
+    <link rel="icon" href="{% static 'assets/auxiliar/logo patricontrol.png' %}">
 </head>
 <body>
     <div class="fundo-login">
@@ -21,11 +21,11 @@
             </div>
             <form method="POST" action="{% url 'login' %}" class="inputs-login">
                 {% csrf_token %}
-                <label for="email-login">Email:</label>
-                {% if email %}
-                    <input id="email-login" type="email" name="email" required value={{email}}>
+                <label for="email-login">Usuário:</label>
+                {% if usuario_input %}
+                    <input id="email-login" type="text" name="email" required value={{usuario_input}}>
                 {% else %}
-                    <input id="email-login" type="email" name="email" required>
+                    <input id="email-login" type="text" name="email" required>
                 {% endif %}
                 <label for="senha-login">Senha:</label>
                 <input id="senha-login" type="password" name="senha" required>

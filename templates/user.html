@@ -25,74 +25,82 @@
             </nav>
         </aside>
         <main class="aparecer-baixo">
-            {% if usuario %}
-                <div class="main-topo">
-                    <div>
-                        <p class="titulo-grande">{{nome_usuario}}</p>
-                        <p class="subtitulo-medio">Sociedade Franciosi</p>
-                    </div>
-                    
+            <div class="main-topo">
+                <div>
+                    {% if usuario %}
+                        {% if nome %}
+                            <p class="titulo-grande">{{nome}}</p>
+                        {% endif %}
+                            <p class="subtitulo-medio">{{usuario.empresa|title}}</p>
+                    {% endif %}
                 </div>
                 
-                <div class="usuario-main">
-                    
-                    <div class="topo-usuario">
-                        <div style="display: flex; flex-direction: column; gap: 20px;">
-                            <div style="display: flex; flex-direction: column; gap: 10px;">
-                                <label for="input-data-usuario">Data de incorporação:</label>
+            </div>
+            
+            <div class="usuario-main">
+                
+                <div class="topo-usuario">
+                    <div style="display: flex; flex-direction: column; gap: 20px;">
+                        <div style="display: flex; flex-direction: column; gap: 10px;">
+                            <label for="input-data-usuario">Data de incorporação:</label>
+                            {% if usuario %}
                                 <p class="subtitulo-medio" id="input-data-usuario">{{usuario.incorporacao}}</p>
-                            </div>
-                            <div style="display: flex; flex-direction: column; gap: 10px;">
-                                <label for="input-tipo-usuario">Tipo de usuário:</label>
-                                <p class="subtitulo-medio" id="input-tipo-usuario">
+                            {% endif %}
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 10px;">
+                            <label for="input-tipo-usuario">Tipo de usuário:</label>
+                            <p class="subtitulo-medio" id="input-tipo-usuario">
+                                {% if usuario %}
                                     {% if usuario.user.is_superuser %}
                                         Admin
                                     {% else %}
                                         Simples
                                     {% endif %}
-                                </p>
-                            </div>
-                            <div style="display: flex; flex-direction: column; gap: 10px;">
-                                <label for="input-tipo-usuario">Empresa:</label>
+                                {% endif %}
+                            </p>
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 10px;">
+                            <label for="input-tipo-usuario">Empresa:</label>
+                            {% if usuario %}
                                 <p class="subtitulo-medio" id="input-empresa-usuario">{{usuario.empresa}}</p>
-                            </div>
-                        </div>
-                        {% if not usuario.foto %}
-                            <img class="img-usuario" src="{% static 'assets/auxiliar/usuario-notfound.jpg' %}" alt="foto usuário">
-                        {% else %}
-                            <img class="img-usuario" src="{{usuario.foto.url}}" alt="foto usuário">
-                        {% endif %}
-                    </div>
-
-                    <div style="display: flex; flex-direction: column; width: 60%; gap: 10px; min-width: 350px;">
-                        <label for="input-email-usuario">Email</label>
-                        <div style="display: flex; justify-content: center; align-items: center;">
-                            <input type="email" id="input-email-usuario" class="inputs-usuario" value="{{usuario.user.email}}" readonly>
-                            <button class="btn-editar-usuario" style="border: transparent 1px solid; cursor:default;"></button>
+                            {% endif %}
                         </div>
                     </div>
-                    <div style="display: flex; flex-direction: column; width: 60%; gap: 10px; min-width: 350px;">
-                        <label for="input-nome-usuario">Nome</label>
-                        <div style="display: flex; justify-content: center; align-items: center;">
-                            <input type="text" id="input-nome-usuario" class="inputs-usuario" value="{{usuario.user.username}}" readonly>
-                            <button class="btn-editar-usuario">
-                                <img src="{% static 'assets/icones/editar_branco.png' %}" alt="">
-                            </button>
-                        </div>
-                    </div>
-                    <div style="display: flex; flex-direction: column;width: 60%; gap: 10px; min-width: 350px;">
-                        <label for="input-senha-usuario">Senha</label>
-                        <div style="display: flex; justify-content: center; align-items: center;">
-                            <input type="password" id="input-senha-usuario" class="inputs-usuario" value="SenhaCriptografada" readonly>
-                            <button class="btn-editar-usuario">
-                                <img src="{% static 'assets/icones/editar_branco.png' %}" alt="">
-                            </button>
-                        </div>
-                    </div>
-                    <a href={% url 'logout' %} id="btn-logout" type="submit" name> Logout </a>
-                    
+                    {% if not usuario.foto %}
+                        <img class="img-usuario" src="{% static 'assets/auxiliar/usuario-notfound.jpg' %}" alt="foto usuário">
+                    {% else %}
+                        <img class="img-usuario" src="{{usuario.foto.url}}" alt="foto usuário">
+                    {% endif %}
                 </div>
-            {% endif %}
+
+                <div style="display: flex; flex-direction: column; width: 60%; gap: 10px; min-width: 350px;">
+                    <label for="input-email-usuario">Email</label>
+                    <div style="display: flex; justify-content: center; align-items: center;">
+                        <input type="email" id="input-email-usuario" class="inputs-usuario" value="{{usuario.user.email}}" readonly>
+                        <button class="btn-editar-usuario" style="border: transparent 1px solid; cursor:default;"></button>
+                    </div>
+                </div>
+                <div style="display: flex; flex-direction: column; width: 60%; gap: 10px; min-width: 350px;">
+                    <label for="input-nome-usuario">Usuário</label>
+                    <div style="display: flex; justify-content: center; align-items: center;">
+                        <input type="text" id="input-nome-usuario" class="inputs-usuario" value="{{usuario.user.username}}" readonly>
+                        <button class="btn-editar-usuario">
+                            <img src="{% static 'assets/icones/editar_branco.png' %}" alt="">
+                        </button>
+                    </div>
+                </div>
+                <div style="display: flex; flex-direction: column;width: 60%; gap: 10px; min-width: 350px;">
+                    <label for="input-senha-usuario">Senha</label>
+                    <div style="display: flex; justify-content: center; align-items: center;">
+                        <input type="password" id="input-senha-usuario" class="inputs-usuario" value="SenhaCriptografada" readonly>
+                        <button class="btn-editar-usuario">
+                            <img src="{% static 'assets/icones/editar_branco.png' %}" alt="">
+                        </button>
+                    </div>
+                </div>
+                <a href={% url 'logout' %} id="btn-logout" type="submit" name> Logout </a>
+                
+            </div>
         </main>
     </div>
     

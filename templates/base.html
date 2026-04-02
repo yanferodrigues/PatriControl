@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=0.8">
     <title>PatriControl</title>
     <link rel="stylesheet" href="{% static 'styles/style.css' %}">
-    <link rel="icon" href="{% static 'assets/auxiliar/Logo patricontrol' %}">
+    <link rel="icon" href="{% static 'assets/auxiliar/logo patricontrol.png' %}">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
@@ -22,18 +22,18 @@
         </div>
         <aside id="aside">
             <a href={% url "index" %}>
-                <img class="logo-empresa" src="{% static 'assets/logos empresas/LOGO SOCIEDADE FRANCIOSI.png' %}" alt="">
+                <img class="logo-empresa" src="{% static 'assets/logos empresas/LOGO '%}{{usuario.empresa}}.png" alt="">
             </a>
             <a href="{% url 'usuario'%}" class="conta-aside">  
                 <div class="conta-aside-conteudo">
-                    {% if usuario %}
+                    {% if usuario.foto %}
                         <img class="imagem-conta" src="{{usuario.foto.url}}" alt="">
                     {% else %}
-                        <img class="imagem-conta" src="assets/auxiliar/usuario-notfound.jpg" alt="">
+                        <img class="imagem-conta" src="{% static 'assets/auxiliar/usuario-notfound.jpg' %}" alt="foto usuário">
                     {% endif %}
                     <div>
-                        <p class="titulo-pequeno">Yan Felipe Rodrigues</p>
-                        <p class="subtitulo-pequeno">Assistente patrimonial</p>
+                        <p class="titulo-pequeno">{{nome}}</p>
+                        <p class="subtitulo-pequeno">{{usuario.empresa|title}}</p>
                     </div>
                 </div>
             </a>
