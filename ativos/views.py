@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from ativos.models import Ativos
+from categorias.models import CategoriaOperacional
 from django.db.models import Sum
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
@@ -53,7 +54,10 @@ def novo_ativo(request):
         return redirect("ativos")
             
         
-    return render(request, "novo patrimonio.html")
+    cats = CategoriaOperacional.objects.filter(
+        empresa=request.user.extras.empresa, ativo=True
+    ).order_by("nome")
+    return render(request, "novo patrimonio.html", {"categorias": cats})
 
 def ativos(request):
     patrimonio_qs = Ativos.objects.filter(empresa=request.user.extras.empresa).order_by("codigo")

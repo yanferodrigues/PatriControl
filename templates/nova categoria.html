@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+            <nav class="navegacao-aside">
+                <a href="{% url 'index' %}">
+                    <img class="icon" src="{% static 'assets/icones/dashboard_branco.png' %}" alt="dashboard">
+                    Dashboard
+                </a>
+                <a href="{% url 'ativos' %}">
+                    <img class="icon" src="{% static 'assets/icones/patrimonio_branco.png' %}" alt="patrimonio">
+                    Ativos
+                </a>
+                <a href="{% url 'novo-ativo' %}">
+                    <img class="icon" src="{% static 'assets/icones/adicionar_branco.png' %}" alt="novo patrimonio">
+                    Novo Ativo
+                </a>
+                <a href="{% url 'investimentos' %}">
+                    <img class="icon" src="{% static 'assets/icones/imovel_branco.png' %}" alt="investimentos">
+                    Investimentos
+                </a>
+                <a href="{% url 'novo-investimento' %}">
+                    <img class="icon" src="{% static 'assets/icones/adicionar_branco.png' %}" alt="novo investimento">
+                    Novo Investimento
+                </a>
+                <a href="{% url 'categorias' %}">
+                    <img class="icon" src="{% static 'assets/icones/patrimonio_branco.png' %}" alt="categorias">
+                    Categorias
+                </a>
+                <a class="link-ativo" href="{% url 'nova-categoria' %}">
+                    <img class="icon" src="{% static 'assets/icones/adicionar_branco.png' %}" alt="nova categoria">
+                    Nova Categoria
+                </a>
+            </nav>
+        </aside>
+        <main class="aparecer-baixo">
+            <form action="{% url 'nova-categoria' %}" method="POST">
+                {% csrf_token %}
+                <div class="informacoes-patrimonio-card">
+                    <p class="titulo-medio">Nova Categoria Operacional</p>
+                    <div class="box-inputs">
+                        <div>
+                            <label class="label-inputs" for="input-nome-categoria">Nome da categoria *</label>
+                            <input class="input-grande" name="input-nome-categoria" id="input-nome-categoria" type="text" placeholder="Ex: MÁQUINAS E IMPLEMENTOS" required>
+                        </div>
+                    </div>
+                </div>
+                <div style="display:flex; justify-content: center; align-items: center; gap:15px;">
+                    <button type="submit" class="botao-editar"> Salvar </button>
+                    <a href="{% url 'categorias' %}" class="botao-excluir"> Cancelar </a>
+                </div>
+            </form>
+        </main>
+    </div>
+    <script src="{% static 'assets/js/geral.js' %}"></script>
+{% endblock content %}

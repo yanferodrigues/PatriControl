@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+            <nav class="navegacao-aside">
+                <a href="{% url 'index' %}">
+                    <img class="icon" src="{% static 'assets/icones/dashboard_branco.png' %}" alt="dashboard">
+                    Dashboard
+                </a>
+                <a href="{% url 'ativos' %}">
+                    <img class="icon" src="{% static 'assets/icones/patrimonio_branco.png' %}" alt="patrimonio">
+                    Ativos
+                </a>
+                <a href="{% url 'novo-ativo' %}">
+                    <img class="icon" src="{% static 'assets/icones/adicionar_branco.png' %}" alt="novo patrimonio">
+                    Novo Ativo
+                </a>
+                <a href="{% url 'investimentos' %}">
+                    <img class="icon" src="{% static 'assets/icones/imovel_branco.png' %}" alt="investimentos">
+                    Investimentos
+                </a>
+                <a href="{% url 'novo-investimento' %}">
+                    <img class="icon" src="{% static 'assets/icones/adicionar_branco.png' %}" alt="novo investimento">
+                    Novo Investimento
+                </a>
+                <a class="link-ativo" href="{% url 'categorias' %}">
+                    <img class="icon" src="{% static 'assets/icones/patrimonio_branco.png' %}" alt="categorias">
+                    Categorias
+                </a>
+                <a href="{% url 'nova-categoria' %}">
+                    <img class="icon" src="{% static 'assets/icones/adicionar_branco.png' %}" alt="nova categoria">
+                    Nova Categoria
+                </a>
+            </nav>
+        </aside>
+        <main class="aparecer-baixo">
+            <div class="main-topo">
+                <div>
+                    <p class="titulo-grande">Categorias Operacionais</p>
+                    <p class="subtitulo-medio">
+                        {% if categorias %}
+                            {{ categorias|length }} categoria{% if categorias|length != 1 %}s{% endif %} cadastrada{% if categorias|length != 1 %}s{% endif %}
+                        {% else %}
+                            Nenhuma categoria cadastrada
+                        {% endif %}
+                    </p>
+                </div>
+                <a class="botao-azul" href="{% url 'nova-categoria' %}">
+                    <img src="{% static 'assets/icones/adicionar_branco.png' %}" alt="Nova categoria">
+                    Nova Categoria
+                </a>
+            </div>
+
+            {% if categorias %}
+            <div class="informacoes-patrimonio-card">
+                <table class="tabela-ativos">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Status</th>
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for cat in categorias %}
+                        <tr>
+                            <td>{{ cat.nome|title }}</td>
+                            <td>
+                                {% if cat.ativo %}
+                                    <span class="patrimonio-ativo">Ativo</span>
+                                {% else %}
+                                    <span class="patrimonio-inativo">Inativo</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <form action="{% url 'apagar-categoria' cat.id %}" method="POST" onsubmit="return confirm('Excluir a categoria {{ cat.nome|title }}?')">
+                                    {% csrf_token %}
+                                    <button type="submit" class="botao-excluir">Excluir</button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <div class="informacoes-patrimonio-card" style="text-align:center; padding: 40px;">
+                <p class="subtitulo-medio">Nenhuma categoria cadastrada ainda.</p>
+                <a href="{% url 'nova-categoria' %}" class="botao-azul" style="margin-top:16px; display:inline-flex;">
+                    <img src="{% static 'assets/icones/adicionar_branco.png' %}" alt="">
+                    Criar primeira categoria
+                </a>
+            </div>
+            {% endif %}
+        </main>
+    </div>
+    <script src="{% static 'assets/js/geral.js' %}"></script>
+{% endblock content %}
