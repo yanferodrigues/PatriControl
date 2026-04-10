@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from ativos.models import Ativos
 from django.db.models import Sum
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 
 
 
@@ -55,12 +56,16 @@ def novo_ativo(request):
     return render(request, "novo patrimonio.html")
 
 def ativos(request):
-    patrimonio = Ativos.objects.filter(empresa = request.user.extras.empresa).order_by("codigo")
-    valor_total = patrimonio.aggregate(total = Sum('valor'))['total']
+    patrimonio_qs = Ativos.objects.filter(empresa=request.user.extras.empresa).order_by("codigo")
+    valor_total = patrimonio_qs.aggregate(total=Sum('valor'))['total']
+    paginator = Paginator(patrimonio_qs, 50)
+    patrimonio = paginator.get_page(request.GET.get('page', 1))
 
     return render(request, "ativos.html", {
-        "patrimonio":patrimonio,
-        "valor_total": valor_total
+        "patrimonio": patrimonio,
+        "patrimonio_todos": patrimonio_qs,
+        "valor_total": valor_total,
+        "total_count": paginator.count,
     })
 
 def descricao_ativo(request,ativo_id):
@@ -68,38 +73,38 @@ def descricao_ativo(request,ativo_id):
     return render(request, "descricao ativo.html", {
         "ativo":ativo,
     })
+
+def apagar_ativo(request, ativo_id):
+    ativo = get_object_or_404(Ativos, id=ativo_id, empresa=request.user.extras.empresa)
+    if request.method == "POST":
+        ativo.delete()
+        return redirect("ativos")
+    return redirect("descricao-ativo", ativo_id=ativo_id)
     
 def buscar_ativo(request):
-    ativos = Ativos.objects.filter(empresa = request.user.extras.empresa).order_by("codigo")
-    
+    ativos = Ativos.objects.filter(empresa=request.user.extras.empresa).order_by("codigo")
+
     if "buscar" in request.GET:
         busca_ativo = request.GET['buscar']
-        
-        ativos = ativos.filter(codigo__icontains= busca_ativo) or ativos.filter(descricao__icontains= busca_ativo)
+        ativos = ativos.filter(codigo__icontains=busca_ativo) or ativos.filter(descricao__icontains=busca_ativo)
     if "categoria" in request.GET:
         categoria_ativo = request.GET['categoria']
-        
         if categoria_ativo != 'TODOS':
-            ativos = ativos.filter(categoria = categoria_ativo)
-        else:
-            pass
+            ativos = ativos.filter(categoria=categoria_ativo)
     if "status" in request.GET:
         status = request.GET['status']
-        
-        if status == "1" | status == "0":
-            ativos = ativos.filter(ativo = status == '1')
-        else:
-            pass
+        if status in ("1", "0"):
+            ativos = ativos.filter(ativo=status == '1')
     if "filial" in request.GET:
         filial = request.GET['filial']
-
         if filial != 'TODOS':
-            ativos = ativos.filter(localizacao = filial)
-        else:
-            pass
-        
+            ativos = ativos.filter(localizacao=filial)
 
-    
+    paginator = Paginator(ativos, 50)
+    patrimonio = paginator.get_page(request.GET.get('page', 1))
+
     return render(request, "buscar_ativo.html", {
-        "patrimonio": ativos,
+        "patrimonio": patrimonio,
+        "patrimonio_todos": ativos,
+        "total_count": paginator.count,
     })

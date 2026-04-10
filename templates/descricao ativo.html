@@ -51,7 +51,7 @@
                             Editar
                             <img src="{% static 'assets/icones/editar_branco.png' %}" alt="editar patrimonio">
                         </button>
-                        <button class="botao-excluir">
+                        <button class="botao-excluir" onclick="abrirModalExcluir()">
                             Excluir
                             <img src="{% static 'assets/icones/lixeira_branca.png' %}" alt="excluir patrimonio">
                         </button>
@@ -154,8 +154,19 @@
                                     </p>
                                 </div>
                                 <div class="valores-ativo atual">
-                                    <p class="subtitulo-medio">Valor de atual</p>
-                                    <p class="titulo-medio">R$3.200,00</p>
+                                    <p class="subtitulo-medio">Valor atual (depreciado)</p>
+                                    <p class="titulo-medio">
+                                        {% if ativo.valor_depreciado is not None %}
+                                            R$ {{ ativo.valor_depreciado|intcomma }}
+                                            {% if ativo.percentual_depreciado is not None %}
+                                                <span class="subtitulo-pequeno" style="display:block; opacity:0.7;">
+                                                    {{ ativo.percentual_depreciado }}% depreciado
+                                                </span>
+                                            {% endif %}
+                                        {% else %}
+                                            NÃO INFORMADO
+                                        {% endif %}
+                                    </p>
                                 </div>
                             </div>
                             <div class="sep-detalhes" style="display: flex; flex-direction: column;">
@@ -218,6 +229,33 @@
         </main>
     </div>
     
+    <div class="modal-overlay" id="modal-excluir" onclick="fecharModalExcluir(event)">
+        <div class="modal-caixa">
+            <p class="titulo-pequeno">Excluir ativo</p>
+            <p class="subtitulo-medio" style="margin-top: 8px;">
+                Tem certeza que deseja excluir <strong>{{ ativo.codigo|upper }}</strong>?<br>
+                Essa ação não pode ser desfeita.
+            </p>
+            <div class="modal-botoes">
+                <button class="botao-editar" onclick="fecharModalExcluir()">Cancelar</button>
+                <form method="POST" action="{% url 'apagar-ativo' ativo.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="botao-excluir">Excluir</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <script src="{% static 'assets/js/dashboard.js' %}"></script>
     <script src="{% static 'assets/js/geral.js' %}"></script>
+    <script>
+        function abrirModalExcluir() {
+            document.getElementById('modal-excluir').classList.add('ativo');
+        }
+        function fecharModalExcluir(event) {
+            if (!event || event.target === document.getElementById('modal-excluir')) {
+                document.getElementById('modal-excluir').classList.remove('ativo');
+            }
+        }
+    </script>
 {% endblock content %}

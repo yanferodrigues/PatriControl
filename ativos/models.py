@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 from user.models import Empresa
 
 class Ativos(models.Model):
@@ -42,4 +43,22 @@ class Ativos(models.Model):
     valor = models.FloatField(blank=True, null=True)
     nota = models.FileField(upload_to="documentos/%Y/%m/%d", blank=True)
 
+    TAXA_DEPRECIACAO_ANUAL = 0.10
 
+    @property
+    def valor_depreciado(self):
+        if not self.valor or not self.incorporacao:
+            return None
+        hoje = timezone.now().date()
+        anos = (hoje - self.incorporacao).days / 365.25
+        fator = max(0.0, 1 - self.TAXA_DEPRECIACAO_ANUAL * anos)
+        return round(self.valor * fator, 2)
+
+    @property
+    def percentual_depreciado(self):
+        if not self.valor or not self.incorporacao:
+            return None
+        hoje = timezone.now().date()
+        anos = (hoje - self.incorporacao).days / 365.25
+        percentual = min(100.0, self.TAXA_DEPRECIACAO_ANUAL * anos * 100)
+        return round(percentual, 1)

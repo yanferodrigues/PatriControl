@@ -1,6 +1,9 @@
 const graficoDB = document.getElementById("grafico-dashboard");
+if (!graficoDB) {
+    // Não está na página do dashboard — nada a fazer
+}
 
-const chart = new Chart(graficoDB, {
+const chart = graficoDB ? new Chart(graficoDB, {
     type: 'doughnut',
 
     data: {
@@ -74,28 +77,42 @@ const chart = new Chart(graficoDB, {
             }
         }
     }
-});
+}) : null;
 
 
-// 🔥 FUNÇÃO QUE BUSCA DO DJANGO
+// Busca dados do gráfico no Django
 function carregarGrafico() {
+    if (!chart) return;
     fetch('api/grafico/')
         .then(response => response.json())
         .then(data => {
-
-            console.log("Dados do Django:", data);
-
-            // 🔥 AGORA VEM TUDO DINÂMICO
             chart.data.labels = data.labels;
             chart.data.datasets[0].data = data.valores;
-
             chart.update();
         })
         .catch(error => console.error("Erro ao carregar gráfico:", error));
 }
 
 
-// 🔥 EXECUTA AO CARREGAR A PÁGINA
 document.addEventListener("DOMContentLoaded", () => {
     carregarGrafico();
+    // duplo rAF garante que o layout já foi calculado pelo browser
+    requestAnimationFrame(() => requestAnimationFrame(ajustarValoresCards));
 });
+
+function ajustarValoresCards() {
+    const valores = document.querySelectorAll(".main-meio-index-card-informacoes .titulo-grande");
+
+    valores.forEach(el => {
+        const maxWidth = el.parentElement.clientWidth;
+        if (maxWidth === 0) return;
+
+        let size = 2.0;
+        el.style.fontSize = size + "rem";
+
+        while (el.scrollWidth > maxWidth && size > 0.65) {
+            size = Math.round((size - 0.05) * 100) / 100;
+            el.style.fontSize = size + "rem";
+        }
+    });
+}

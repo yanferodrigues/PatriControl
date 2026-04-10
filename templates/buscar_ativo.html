@@ -30,8 +30,8 @@
                 <div>
                     <p class="titulo-grande">Patrimônio</p>
                     <p class="subtitulo-medio">
-                        {% if patrimonio %}
-                        {{patrimonio|length}} item em patrimônio encontrado
+                        {% if total_count %}
+                        {{ total_count }} item{% if total_count != 1 %}s{% endif %} encontrado{% if total_count != 1 %}s{% endif %}
                         {% else %}
                         Nenhum ativo encontrado
                         {% endif %}
@@ -96,9 +96,23 @@
                                 <th>VALOR</th>
                                 <th>ADESIVADO</th>
                             </tr>
+                            <tr class="filtro-row">
+                                <th><input class="filtro-coluna" data-col="0" type="text" placeholder="Filtrar..."></th>
+                                <th><input class="filtro-coluna" data-col="1" type="text" placeholder="Filtrar..."></th>
+                                <th><input class="filtro-coluna" data-col="2" type="text" placeholder="Filtrar..."></th>
+                                <th><input class="filtro-coluna" data-col="3" type="text" placeholder="Filtrar..."></th>
+                                <th><input class="filtro-coluna" data-col="4" type="text" placeholder="Filtrar..."></th>
+                                <th><input class="filtro-coluna" data-col="5" type="text" placeholder="Filtrar..."></th>
+                                <th><input class="filtro-coluna" data-col="6" type="text" placeholder="Filtrar..."></th>
+                                <th><input class="filtro-coluna" data-col="7" type="text" placeholder="Filtrar..."></th>
+                                <th><input class="filtro-coluna" data-col="8" type="text" placeholder="Filtrar..."></th>
+                                <th><input class="filtro-coluna" data-col="9" type="text" placeholder="Filtrar..."></th>
+                                <th><input class="filtro-coluna" data-col="10" type="text" placeholder="Filtrar..."></th>
+                                <th><input class="filtro-coluna" data-col="11" type="text" placeholder="Filtrar..."></th>
+                            </tr>
                         </thead>
                         <tbody>
-                            {% for ativo in patrimonio %}
+                            {% for ativo in patrimonio_todos %}
                             <tr onclick="window.location.href='{% url 'descricao-ativo' ativo.id%}'" style="cursor: pointer;">
                                 <td>{{ ativo.localizacao|upper }}</td>
                                 <td>{{ ativo.codigo|upper }}</td>
@@ -195,11 +209,40 @@
                     <p class='subtitulo-medio' style='margin-top:50px;'>NÃO EXISTEM PATRIMÔNIOS CADASTRADOS</p>
                 {% endif %}
                 </div>
-                    
+
+                {% if patrimonio.paginator.num_pages > 1 %}
+                <div class="paginacao">
+                    <span class="subtitulo-pequeno">
+                        Página {{ patrimonio.number }} de {{ patrimonio.paginator.num_pages }}
+                    </span>
+                    <div class="paginacao-botoes">
+                        {% if patrimonio.has_previous %}
+                            <a href="{% querystring page=patrimonio.previous_page_number %}" class="paginacao-btn">‹</a>
+                        {% else %}
+                            <span class="paginacao-btn desativado">‹</span>
+                        {% endif %}
+
+                        {% for num in patrimonio.paginator.page_range %}
+                            {% if num == patrimonio.number %}
+                                <span class="paginacao-btn ativo">{{ num }}</span>
+                            {% else %}
+                                <a href="{% querystring page=num %}" class="paginacao-btn">{{ num }}</a>
+                            {% endif %}
+                        {% endfor %}
+
+                        {% if patrimonio.has_next %}
+                            <a href="{% querystring page=patrimonio.next_page_number %}" class="paginacao-btn">›</a>
+                        {% else %}
+                            <span class="paginacao-btn desativado">›</span>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endif %}
+
             </div>
         </main>
     </div>
-    
+
     <script src="{% static 'assets/js/dashboard.js' %}"></script>
     <script src="{% static 'assets/js/geral.js' %}"></script>
 {% endblock content %}

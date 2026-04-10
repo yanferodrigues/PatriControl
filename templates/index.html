@@ -31,10 +31,10 @@
                     <p class="titulo-grande">Dashboard</p>
                     <p class="subtitulo-medio">Visão geral do controle patrimonial</p>
                 </div>
-                <button href="{% url 'novo-ativo' %}" class="botao-azul">
+                <a href="{% url 'novo-ativo' %}" class="botao-azul">
                     <img src="{% static 'assets/icones/adicionar_branco.png' %}" alt="Novo patrimônio">
                     Novo patrimonio
-                </button>
+                </a>
             </div>
             <div class="main-meio-index">
                 {% if ativos %}
@@ -61,6 +61,20 @@
                         <div>
                             <div class="icone-cards roxo">
                                 <img src="{% static 'assets/icones/dinheiro_branco.png' %}" alt="quantidade patrimonio">
+                            </div>
+                        </div>
+                    </a>
+                {% endif %}
+                {% if valor_total_depreciado %}
+                    <a class="main-meio-index-card">
+                        <div class="main-meio-index-card-informacoes">
+                            <p class="subtitulo-medio">Valor atual (depreciado)</p>
+                            <p class="titulo-grande">R$ {{ valor_total_depreciado|intcomma }}</p>
+                            <p class="subtitulo-pequeno">10% ao ano sobre ativos</p>
+                        </div>
+                        <div>
+                            <div class="icone-cards vermelho">
+                                <img src="{% static 'assets/icones/dinheiro_branco.png' %}" alt="valor depreciado">
                             </div>
                         </div>
                     </a>

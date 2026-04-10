@@ -14,13 +14,17 @@ def dashboard(request):
     valor_total_ativos = ativos.aggregate(total = Sum("valor"))["total"]
     valor_total_investimentos = investimentos.aggregate(total = Sum("valor"))["total"]
     ativos_ultimos = ativos.order_by("-id")[:7]
-    
+    valor_total_depreciado = sum(
+        a.valor_depreciado for a in ativos if a.valor_depreciado is not None
+    )
+
     return render(request,"index.html", {
         "ativos":ativos,
         "ativos_ultimos":ativos_ultimos,
         "investimentos":investimentos,
         "valor_total_ativos":valor_total_ativos,
-        "valor_total_investimentos":valor_total_investimentos
+        "valor_total_investimentos":valor_total_investimentos,
+        "valor_total_depreciado": valor_total_depreciado if valor_total_depreciado else None,
     })
 
 def grafico(request):
