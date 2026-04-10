@@ -70,6 +70,19 @@ document.querySelectorAll(".filtro-coluna").forEach(input => {
     input.addEventListener("keydown", e => { if (e.key === "Enter") e.preventDefault(); });
 });
 
+// Accordion nav grupos
+document.querySelectorAll(".nav-grupo").forEach(grupo => {
+    if (grupo.querySelector(".link-ativo")) {
+        grupo.classList.add("aberto");
+    }
+});
+
+document.querySelectorAll(".nav-grupo-cabeca").forEach(cabeca => {
+    cabeca.addEventListener("click", () => {
+        cabeca.closest(".nav-grupo").classList.toggle("aberto");
+    });
+});
+
 // Fecha menu lateral com Escape
 document.addEventListener("keydown", e => {
     if (e.key === "Escape") {

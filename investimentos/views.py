@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.db.models import Sum
 from investimentos.models import Investimentos
+from filiais.models import Filial
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 
@@ -32,7 +33,10 @@ def novo_investimento(request):
 
         return redirect("investimentos")
     
-    return render(request, "novo investimento.html")
+    fils = Filial.objects.filter(
+        empresa=request.user.extras.empresa
+    ).order_by("nome")
+    return render(request, "novo investimento.html", {"filiais": fils})
 
 def investimentos(request):
     investimentos_qs = Investimentos.objects.filter(empresa=request.user.extras.empresa).order_by("codigo")

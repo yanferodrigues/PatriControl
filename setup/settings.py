@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'investimentos.apps.InvestimentosConfig',
     'user.apps.UserConfig',
     'categorias.apps.CategoriasConfig',
+    'filiais.apps.FiliaisConfig',
     'django.contrib.humanize',
 ]
 

@@ -7,30 +7,50 @@
                     <img class="icon" src="{% static 'assets/icones/dashboard_branco.png' %}" alt="dashboard">
                     Dashboard
                 </a>
-                <a class="link-ativo" href="{% url 'ativos' %}">
-                    <img class="icon" src="{% static 'assets/icones/patrimonio_branco.png' %}" alt="patrimonio">
-                    Ativos
-                </a>
-                <a href="{% url 'novo-ativo' %}">
-                    <img class="icon" src="{% static 'assets/icones/adicionar_branco.png' %}" alt="novo patrimonio">
-                    Novo Ativo
-                </a>
-                <a href="{% url 'investimentos' %}">
-                    <img class="icon" src="{% static 'assets/icones/imovel_branco.png' %}" alt="patrimonio">
-                    Investimentos
-                </a>
-                <a href="{% url 'novo-investimento' %}">
-                    <img class="icon" src="{% static 'assets/icones/adicionar_branco.png' %}" alt="novo patrimonio">
-                    Novo Investimento
-                </a>
-                <a href="{% url 'categorias' %}">
-                    <img class="icon" src="{% static 'assets/icones/patrimonio_branco.png' %}" alt="categorias">
-                    Categorias
-                </a>
-                <a href="{% url 'nova-categoria' %}">
-                    <img class="icon" src="{% static 'assets/icones/adicionar_branco.png' %}" alt="nova categoria">
-                    Nova Categoria
-                </a>
+                <div class="nav-grupo">
+                    <button class="nav-grupo-cabeca">
+                        <img class="icon" src="{% static 'assets/icones/patrimonio_branco.png' %}" alt="ativos">
+                        Ativos
+                        <span class="nav-grupo-seta">▾</span>
+                    </button>
+                    <div class="nav-grupo-itens">
+                        <a class="link-ativo" href="{% url 'ativos' %}">Visualizar</a>
+                        <a href="{% url 'novo-ativo' %}">Criar</a>
+                    </div>
+                </div>
+                <div class="nav-grupo">
+                    <button class="nav-grupo-cabeca">
+                        <img class="icon" src="{% static 'assets/icones/imovel_branco.png' %}" alt="investimentos">
+                        Investimentos
+                        <span class="nav-grupo-seta">▾</span>
+                    </button>
+                    <div class="nav-grupo-itens">
+                        <a href="{% url 'investimentos' %}">Visualizar</a>
+                        <a href="{% url 'novo-investimento' %}">Criar</a>
+                    </div>
+                </div>
+                <div class="nav-grupo">
+                    <button class="nav-grupo-cabeca">
+                        <img class="icon" src="{% static 'assets/icones/patrimonio_branco.png' %}" alt="categorias">
+                        Categorias
+                        <span class="nav-grupo-seta">▾</span>
+                    </button>
+                    <div class="nav-grupo-itens">
+                        <a href="{% url 'categorias' %}">Visualizar</a>
+                        <a href="{% url 'nova-categoria' %}">Criar</a>
+                    </div>
+                </div>
+                <div class="nav-grupo">
+                    <button class="nav-grupo-cabeca">
+                        <img class="icon" src="{% static 'assets/icones/patrimonio_branco.png' %}" alt="filiais">
+                        Filiais
+                        <span class="nav-grupo-seta">▾</span>
+                    </button>
+                    <div class="nav-grupo-itens">
+                        <a href="{% url 'filiais' %}">Visualizar</a>
+                        <a href="{% url 'nova-filial' %}">Criar</a>
+                    </div>
+                </div>
             </nav>
         </aside>
         <main class="aparecer-baixo">

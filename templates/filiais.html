@@ -35,7 +35,7 @@
                         <span class="nav-grupo-seta">▾</span>
                     </button>
                     <div class="nav-grupo-itens">
-                        <a class="link-ativo" href="{% url 'categorias' %}">Visualizar</a>
+                        <a href="{% url 'categorias' %}">Visualizar</a>
                         <a href="{% url 'nova-categoria' %}">Criar</a>
                     </div>
                 </div>
@@ -46,7 +46,7 @@
                         <span class="nav-grupo-seta">▾</span>
                     </button>
                     <div class="nav-grupo-itens">
-                        <a href="{% url 'filiais' %}">Visualizar</a>
+                        <a class="link-ativo" href="{% url 'filiais' %}">Visualizar</a>
                         <a href="{% url 'nova-filial' %}">Criar</a>
                     </div>
                 </div>
@@ -55,22 +55,22 @@
         <main class="aparecer-baixo">
             <div class="main-topo">
                 <div>
-                    <p class="titulo-grande">Categorias Operacionais</p>
+                    <p class="titulo-grande">Filiais</p>
                     <p class="subtitulo-medio">
-                        {% if categorias %}
-                            {{ categorias|length }} categoria{% if categorias|length != 1 %}s{% endif %} cadastrada{% if categorias|length != 1 %}s{% endif %}
+                        {% if filiais %}
+                            {{ filiais|length }} filial{% if filiais|length != 1 %}is{% endif %} cadastrada{% if filiais|length != 1 %}s{% endif %}
                         {% else %}
-                            Nenhuma categoria cadastrada
+                            Nenhuma filial cadastrada
                         {% endif %}
                     </p>
                 </div>
-                <a class="botao-azul" href="{% url 'nova-categoria' %}">
-                    <img src="{% static 'assets/icones/adicionar_branco.png' %}" alt="Nova categoria">
-                    Nova Categoria
+                <a class="botao-azul" href="{% url 'nova-filial' %}">
+                    <img src="{% static 'assets/icones/adicionar_branco.png' %}" alt="Nova filial">
+                    Nova Filial
                 </a>
             </div>
 
-            {% if categorias %}
+            {% if filiais %}
             <div class="informacoes-patrimonio-card">
                 <table class="tabela-ativos">
                     <thead>
@@ -80,11 +80,11 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for cat in categorias %}
+                        {% for filial in filiais %}
                         <tr>
-                            <td>{{ cat.nome|title }}</td>
+                            <td>{{ filial.nome|title }}</td>
                             <td>
-                                <form action="{% url 'apagar-categoria' cat.id %}" method="POST" onsubmit="return confirm('Excluir a categoria {{ cat.nome|title }}?')">
+                                <form action="{% url 'apagar-filial' filial.id %}" method="POST" onsubmit="return confirm('Excluir a filial {{ filial.nome|title }}?')">
                                     {% csrf_token %}
                                     <button type="submit" class="botao-excluir">Excluir</button>
                                 </form>
@@ -96,10 +96,10 @@
             </div>
             {% else %}
             <div class="informacoes-patrimonio-card" style="text-align:center; padding: 40px;">
-                <p class="subtitulo-medio">Nenhuma categoria cadastrada ainda.</p>
-                <a href="{% url 'nova-categoria' %}" class="botao-azul" style="margin-top:16px; display:inline-flex;">
+                <p class="subtitulo-medio">Nenhuma filial cadastrada ainda.</p>
+                <a href="{% url 'nova-filial' %}" class="botao-azul" style="margin-top:16px; display:inline-flex;">
                     <img src="{% static 'assets/icones/adicionar_branco.png' %}" alt="">
-                    Criar primeira categoria
+                    Criar primeira filial
                 </a>
             </div>
             {% endif %}
