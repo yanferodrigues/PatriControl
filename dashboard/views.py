@@ -9,11 +9,11 @@ from user.models import Usuario
 @login_required
 def dashboard(request):
 
-    ativos = Ativos.objects.all()
-    investimentos = Investimentos.objects.all()
+    ativos = Ativos.objects.filter(empresa = request.user.extras.empresa)
+    investimentos = Investimentos.objects.filter(empresa = request.user.extras.empresa)
     valor_total_ativos = ativos.aggregate(total = Sum("valor"))["total"]
     valor_total_investimentos = investimentos.aggregate(total = Sum("valor"))["total"]
-    ativos_ultimos = Ativos.objects.all().order_by("-id")[:7]
+    ativos_ultimos = ativos.order_by("-id")[:7]
     
     return render(request,"index.html", {
         "ativos":ativos,
@@ -41,14 +41,14 @@ def grafico(request):
     valores = []
 
     for categoria in categorias:
-        quantidade = Ativos.objects.filter(categoria=categoria).count()
+        quantidade = Ativos.objects.filter(categoria=categoria, empresa = request.user.extras.empresa).count()
 
         labels.append(categoria.capitalize())  # deixa bonito no gráfico
         valores.append(quantidade)
 
     # imóveis separado
     labels.append("Imóveis")
-    valores.append(Investimentos.objects.count())
+    valores.append(Investimentos.objects.filter(empresa = request.user.extras.empresa).count())
 
     return JsonResponse({
         "labels": labels,

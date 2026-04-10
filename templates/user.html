@@ -77,25 +77,18 @@
                     <label for="input-email-usuario">Email</label>
                     <div style="display: flex; justify-content: center; align-items: center;">
                         <input type="email" id="input-email-usuario" class="inputs-usuario" value="{{usuario.user.email}}" readonly>
-                        <button class="btn-editar-usuario" style="border: transparent 1px solid; cursor:default;"></button>
                     </div>
                 </div>
                 <div style="display: flex; flex-direction: column; width: 60%; gap: 10px; min-width: 350px;">
                     <label for="input-nome-usuario">Usuário</label>
                     <div style="display: flex; justify-content: center; align-items: center;">
                         <input type="text" id="input-nome-usuario" class="inputs-usuario" value="{{usuario.user.username}}" readonly>
-                        <button class="btn-editar-usuario">
-                            <img src="{% static 'assets/icones/editar_branco.png' %}" alt="">
-                        </button>
                     </div>
                 </div>
                 <div style="display: flex; flex-direction: column;width: 60%; gap: 10px; min-width: 350px;">
                     <label for="input-senha-usuario">Senha</label>
                     <div style="display: flex; justify-content: center; align-items: center;">
                         <input type="password" id="input-senha-usuario" class="inputs-usuario" value="SenhaCriptografada" readonly>
-                        <button class="btn-editar-usuario">
-                            <img src="{% static 'assets/icones/editar_branco.png' %}" alt="">
-                        </button>
                     </div>
                 </div>
                 <a href={% url 'logout' %} id="btn-logout" type="submit" name> Logout </a>

@@ -19,6 +19,7 @@ def novo_investimento(request):
         valor = request.POST.get("input-valor-investimento")
 
         Investimentos.objects.create(
+            empresa= request.user.extras.empresa,
             codigo=codigo,
             descricao=descricao,
             ativo=status,
@@ -33,7 +34,7 @@ def novo_investimento(request):
     return render(request, "novo investimento.html")
 
 def investimentos(request):
-    investimentos = Investimentos.objects.all()
+    investimentos = Investimentos.objects.filter(empresa = request.user.extras.empresa).order_by("codigo")
     valor_total = investimentos.aggregate(total = Sum('valor'))['total']
 
     return render(request, "investimentos.html", {

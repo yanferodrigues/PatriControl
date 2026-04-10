@@ -7,6 +7,7 @@ django.setup()
 
 from ativos.models import Ativos
 from investimentos.models import Investimentos
+from user.models import Empresa
 df = pd.read_excel('ATIVOS SF.xlsx')
 
 
@@ -14,6 +15,7 @@ for _, linha in df.iterrows():
     data = pd.to_datetime(linha['DATA EMISSÃO'], errors='coerce')
     if linha['CLASSE DO ATIVO'] != 'IMÓVEIS':
         Ativos.objects.create(
+            empresa = Empresa.objects.get(nome="SOCIEDADE FRANCIOSI"),
             codigo=linha['IS '],
             descricao=linha['DESCRIÇÃO DO ITEM'],
             chassi=linha['CHASSI'],
@@ -36,6 +38,7 @@ for _, linha in df.iterrows():
     data = pd.to_datetime(linha['DATA EMISSÃO'], errors='coerce')
     if linha['CLASSE DO ATIVO'] == 'IMÓVEIS':
         Investimentos.objects.create(
+            empresa = Empresa.objects.get(nome="SOCIEDADE FRANCIOSI"),
             codigo=linha['IS '],
             descricao=linha['DESCRIÇÃO DO ITEM'],
             ativo=True,

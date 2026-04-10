@@ -3,6 +3,8 @@ from ativos.models import Ativos
 from django.db.models import Sum
 from django.contrib.auth.decorators import login_required
 
+
+
 @login_required
 def novo_ativo(request):
     if request.method == "POST":
@@ -26,6 +28,7 @@ def novo_ativo(request):
         nota_fiscal = request.FILES.get("input-nota-fiscal-ativo")
         
         Ativos.objects.create(
+            empresa = request.user.extras.empresa,
             foto=foto,
             codigo=codigo,
             descricao=descricao,
@@ -52,7 +55,7 @@ def novo_ativo(request):
     return render(request, "novo patrimonio.html")
 
 def ativos(request):
-    patrimonio = Ativos.objects.all().order_by("codigo")
+    patrimonio = Ativos.objects.filter(empresa = request.user.extras.empresa).order_by("codigo")
     valor_total = patrimonio.aggregate(total = Sum('valor'))['total']
 
     return render(request, "ativos.html", {
@@ -67,7 +70,7 @@ def descricao_ativo(request,ativo_id):
     })
     
 def buscar_ativo(request):
-    ativos = Ativos.objects.order_by("codigo")
+    ativos = Ativos.objects.filter(empresa = request.user.extras.empresa).order_by("codigo")
     
     if "buscar" in request.GET:
         busca_ativo = request.GET['buscar']

@@ -1,4 +1,5 @@
 from django.db import models
+from user.models import Empresa
 
 class Ativos(models.Model):
     CATEGORIA_CHOICES = [
@@ -20,7 +21,8 @@ class Ativos(models.Model):
         ('ESCRITORIO CENTRAL', 'Escritório Central'),
         ('UBA', 'Uba'),
     ]
-
+    
+    empresa = models.ForeignKey(Empresa, related_name="ativos",on_delete=models.CASCADE, null=False, blank=False)
     foto = models.ImageField(upload_to="fotos/%Y/%m/%d", blank=True)
     codigo = models.CharField(blank=False, null=False, max_length=10)
     descricao = models.CharField(blank=False, null=False, max_length=50)
